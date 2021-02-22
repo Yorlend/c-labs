@@ -11,14 +11,8 @@ int main()
     bc = sqrtf((x_b - x_c)*(x_b - x_c) + (y_b - y_c)*(y_b - y_c));
     ac = sqrtf((x_a - x_c)*(x_a - x_c) + (y_a - y_c)*(y_a - y_c));
 
-    if (ab >= (bc + ac) || bc >= (ac + ab) ||
-         ac >= (bc + ab))
-        printf("No triangle\n");
-    else
-    {
-        P = ab + bc + ac;
-        printf("Perimeter of a triangle is: %.6lf\n", P);
-    }
+    P = ab + bc + ac;
+    printf("Perimeter of a triangle is: %.6lf\n", P);
 
     return 0;
 }
