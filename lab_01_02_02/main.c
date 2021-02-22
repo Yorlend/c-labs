@@ -16,8 +16,8 @@ int main()
         printf("No triangle\n");
     else
     {
-    P = ab + bc + ac;
-    printf("Perimeter of a triangle is: %.6lf\n", P);
+        P = ab + bc + ac;
+        printf("Perimeter of a triangle is: %.6lf\n", P);
     }
 
     return 0;
