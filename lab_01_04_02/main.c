@@ -13,7 +13,7 @@ int main()
     inp_sec %= 60;
     
     printf("Converted time is:\n%d hours %d minutes %d seconds\n",
-        hour, min, inp_sec);
+    hour, min, inp_sec);
 
     return 0;
 }
