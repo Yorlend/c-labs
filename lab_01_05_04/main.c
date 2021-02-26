@@ -13,15 +13,13 @@ void prime_devisors(int n)
         }
         i++;
     }
-    
 }
-
 
 int main(void)
 {
     int n;
 
-    if ((scanf("%d", &n) != 1) || (n < 1)) 
+    if ((scanf("%d", &n) != 1) || (n < 1))
         return 1;
 
     prime_devisors(n);
