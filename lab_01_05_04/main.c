@@ -16,6 +16,7 @@ void prime_devisors(int n)
     
 }
 
+
 int main(void)
 {
     int n;
