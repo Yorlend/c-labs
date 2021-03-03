@@ -14,12 +14,6 @@ int main(void)
         return 1;
     }
 
-    if (n < 0)
-    {
-        printf("Error: 2\n");
-        return 2;
-    }
-
     res = cycle_shift(a, n);
 
     printf("Result: ");
