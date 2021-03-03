@@ -36,6 +36,8 @@ void dec_to_bin(unsigned int x)
 
 unsigned int cycle_shift(unsigned int x, int n)
 {
+    while (n < 0)
+        n += 32;
     for (int i = 0; i < n; i++)
         x = (x << 1) | ((x >> 31) & 1);
     
