@@ -1,11 +1,12 @@
 #include <stdio.h>
+#include <stdint.h>
 
 unsigned int cycle_shift(unsigned int x, int n);
 void dec_to_bin(unsigned int x);
 
 int main(void)
 {
-    unsigned int a, res;
+    uint32_t a, res;
     int n;
 
     if (scanf("%u%d", &a, &n) != 2)
@@ -31,13 +32,8 @@ int main(void)
 
 void dec_to_bin(unsigned int x)
 {
-    if (x < 2)
-        printf("%d", x);
-    else
-    {
-        dec_to_bin(x >> 1);
-        printf("%d", x % 2);
-    }
+    for (int i = 31; i >= 0; i--)
+        printf("%d", (x >> i) % 2);
 }
 
 unsigned int cycle_shift(unsigned int x, int n)
