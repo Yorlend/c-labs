@@ -14,7 +14,7 @@ int main(void)
         return 1;
     }
 
-    if (n <= 0)
+    if (n < 0)
     {
         printf("Error: 2\n");
         return 2;
@@ -42,8 +42,5 @@ void dec_to_bin(unsigned int x)
 
 unsigned int cycle_shift(unsigned int x, int n)
 {
-    for (int i = 0; i < n; i++)
-        x = (x << 1) | ((x >> 31) & 1);
-    
-    return x;
+    return (x << n) | (x >> (32 - n));
 }
