@@ -14,6 +14,12 @@ int main(void)
         return 1;
     }
 
+    if (n <= 0)
+    {
+        printf("Error: 2\n");
+        return 2;
+    }
+
     res = cycle_shift(a, n);
 
     printf("Result: ");
@@ -29,15 +35,13 @@ void dec_to_bin(unsigned int x)
         printf("%d", x);
     else
     {
-        dec_to_bin(x / 2);
+        dec_to_bin(x >> 1);
         printf("%d", x % 2);
     }
 }
 
 unsigned int cycle_shift(unsigned int x, int n)
 {
-    while (n < 0)
-        n += 32;
     for (int i = 0; i < n; i++)
         x = (x << 1) | ((x >> 31) & 1);
     
