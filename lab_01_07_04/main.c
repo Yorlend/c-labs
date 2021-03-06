@@ -28,11 +28,11 @@ double f(double x, double eps)
     int a = 2, b = 3;
     result = 1;
     tmp = 1;
-    element = -(double)((a * b * x) / 2);
+    element = -(double)((a * b * x) / 2.0);
     while (1)
     {
         result += element;
-        if (fabs(element - tmp) < eps)
+        if (fabs(element - tmp) < eps && element != tmp)
             break;
         tmp = element;
         a++;
