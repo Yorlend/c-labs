@@ -24,17 +24,15 @@ int main(void)
 
 double f(double x, double eps)
 {
-    double result, element, tmp;
+    double result, element;
     int a = 2, b = 3;
     result = 1;
-    tmp = 1;
     element = -(double)((a * b * x) / 2.0);
     while (1)
     {
         result += element;
-        if (fabs(element - tmp) < eps && element != tmp)
+        if (fabs(element) < eps)
             break;
-        tmp = element;
         a++;
         b++;
         element *= -(double)((b * x) / (a - 1));
