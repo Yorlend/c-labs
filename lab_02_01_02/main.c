@@ -7,7 +7,7 @@ double average_neg(int *arr, int size);
 
 int main(void)
 {
-    int arr[N], size;
+    int arr[N] = { 0 }, size;
     double result = 0.;
 
     scanf("%d", &size);
