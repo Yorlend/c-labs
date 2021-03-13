@@ -11,13 +11,16 @@ int main(void)
     double result = 0.;
 
     scanf("%d", &size);
-    if (size > N)
+    if (size > N || size < 1)
         return 1;
 
     if (input_array(arr, size) == 1)
         return 1;
     
     result = average_neg(arr, size);
+
+    if (result == 0)
+        return 1;
 
     printf("%lf", result);
 
