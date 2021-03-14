@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 #define N 10
@@ -9,6 +10,7 @@
 int input_array(int *arr, int *size);
 void output_array(int *arr, int size);
 int reform_array(int *arr, int *size);
+int is_perfect_square(int num);
 
 int main(void)
 {
@@ -52,10 +54,10 @@ int reform_array(int *arr, int *size)
     int i = 0;
     while (i < *size)
     {
-        if (pow(sqrt(arr[i]), 2) == (double)arr[i])
+        if (is_perfect_square(arr[i]))
         {
             for (int tmp = i; tmp < *size - 1; tmp++)
-                arr[tmp] = arr[tmp+1];
+                arr[tmp] = arr[tmp + 1];
             (*size)--;
             continue;
         }
@@ -64,4 +66,14 @@ int reform_array(int *arr, int *size)
     }
 
     return *size == 0;
+}
+
+int is_perfect_square(int num)
+{
+    int result = 0;
+    for (int i = 1; i < sqrt(num) + 1; i++)
+        if (i*i == num)
+            result = 1;
+    
+    return result;
 }
