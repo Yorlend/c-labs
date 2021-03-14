@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 #define N 10
@@ -65,6 +66,7 @@ int form_array(int *arr, int size, int *modified, int *mod_size)
 
 char first_and_last(int num)
 {
+    num = abs(num);
     int digits = (int)log10(num);
     int first, last;
 
