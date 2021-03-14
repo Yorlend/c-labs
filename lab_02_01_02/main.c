@@ -29,9 +29,13 @@ int main(void)
 
 int input_array(int *arr, int size)
 {
+    int tmp;
     for (int i = 0; i < size; i++)
         if (scanf("%d", &arr[i]) != 1)
             return 1;
+
+    if (scanf("%d", &tmp) != EOF)
+        return 1;
 
     return 0;
 }
