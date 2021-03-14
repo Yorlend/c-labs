@@ -13,7 +13,7 @@ char first_and_last(int num);
 int main(void)
 {
     int exit_code = SUCCESS;
-    int arr[N], result_arr[N], size, res_size = 0;
+    int arr[N] = { 0 }, result_arr[N], size, res_size = 0;
     if (input_array(arr, &size) == ERROR)
         exit_code = ERROR;
     else
@@ -27,13 +27,16 @@ int main(void)
 
 int input_array(int *arr, int *size)
 {
-    int exit_code = SUCCESS;
+    int tmp, exit_code = SUCCESS;
     scanf("%d", size);
     if (*size > N)
         exit_code = ERROR;
     for (int i = 0; i < *size && exit_code == SUCCESS; i++)
         if (scanf("%d", &arr[i]) != 1)
             exit_code = ERROR;
+
+    if (scanf("%d", &tmp) != EOF)
+        return 1;
     
     return exit_code;
 }
