@@ -15,23 +15,23 @@ int is_perfect_square(int num);
 int main(void)
 {
     int exit_code = SUCCESS;
-    int arr[N] = { 0 }, result_arr[N], size;
+    int arr[N] = { 0 }, size = 0;
     if (input_array(arr, &size) == ERROR)
         exit_code = ERROR;
     else
         exit_code = reform_array(arr, &size);
 
     if (exit_code == SUCCESS)
-        output_array(result_arr, size);
+        output_array(arr, size);
     
     return exit_code;
 }
 
 int input_array(int *arr, int *size)
 {
-    int tmp, exit_code = SUCCESS;
+    int tmp = 0, exit_code = SUCCESS;
     scanf("%d", size);
-    if (*size > N)
+    if (*size > N || * size < 1)
         exit_code = ERROR;
     for (int i = 0; i < *size && exit_code == SUCCESS; i++)
         if (scanf("%d", &arr[i]) != 1)
@@ -72,7 +72,7 @@ int is_perfect_square(int num)
 {
     int result = 0;
     for (int i = 1; i < sqrt(num) + 1; i++)
-        if (i*i == num)
+        if (i * i == num)
             result = 1;
     
     return result;

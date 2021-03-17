@@ -14,7 +14,7 @@ char first_and_last(int num);
 int main(void)
 {
     int exit_code = SUCCESS;
-    int arr[N] = { 0 }, result_arr[N], size, res_size = 0;
+    int arr[N] = { 0 }, result_arr[N], size = 0, res_size = 0;
     if (input_array(arr, &size) == ERROR)
         exit_code = ERROR;
     else
@@ -28,7 +28,7 @@ int main(void)
 
 int input_array(int *arr, int *size)
 {
-    int tmp, exit_code = SUCCESS;
+    int tmp = 0, exit_code = SUCCESS;
     scanf("%d", size);
     if (*size > N)
         exit_code = ERROR;

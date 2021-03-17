@@ -7,7 +7,7 @@ double average_neg(int *arr, int size);
 
 int main(void)
 {
-    int arr[N] = { 0 }, size;
+    int arr[N] = { 0 }, size = 0;
     double result = 0.;
 
     scanf("%d", &size);
@@ -29,7 +29,7 @@ int main(void)
 
 int input_array(int *arr, int size)
 {
-    int tmp;
+    int tmp = 0;
     for (int i = 0; i < size; i++)
         if (scanf("%d", &arr[i]) != 1)
             return 1;

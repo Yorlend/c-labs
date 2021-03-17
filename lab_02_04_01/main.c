@@ -35,7 +35,7 @@ int main(void)
 
 int input_arr(int *arr)
 {
-    int i = 0, exit = 1;
+    int i = 0, exit = 1, tmp = 0;
     while (exit && (i < 10))
     {
         if (scanf("%d", &arr[i]))
@@ -43,6 +43,9 @@ int input_arr(int *arr)
         else
             exit = 0;
     }
+
+    if (scanf("%d", &tmp) != 1)
+        return 0;
     
     if (exit && i != 0)
         return OVERFLOW;
@@ -64,9 +67,9 @@ void insertion_sort(int *arr, int size)
         tmp = arr[i];
         j = i - 1;
 
-        while ( j > -1 && arr[j] > tmp)
+        while (j > -1 && arr[j] > tmp)
         {
-            arr[j+1] = arr[j];
+            arr[j + 1] = arr[j];
             j--;
         }
 
