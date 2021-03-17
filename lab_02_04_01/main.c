@@ -35,7 +35,7 @@ int main(void)
 
 int input_arr(int *arr)
 {
-    int i = 0, exit = 1, tmp = 0;
+    int i = 0, exit = 1, tmp = 0, rc;
     while (exit && (i < 10))
     {
         if (scanf("%d", &arr[i]))
@@ -44,7 +44,8 @@ int input_arr(int *arr)
             exit = 0;
     }
 
-    if (scanf("%d", &tmp) != 1)
+    rc = scanf("%d", &tmp);
+    if (rc != EOF && i == 10 && rc != 1)
         return 0;
     
     if (exit && i != 0)
