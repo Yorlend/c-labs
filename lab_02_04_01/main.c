@@ -35,7 +35,7 @@ int main(void)
 
 int input_arr(int *arr)
 {
-    int i = 0, exit = 1, tmp = 0, rc;
+    int i = 0, exit = 1, tmp = 0;
     while (exit && (i < 10))
     {
         if (scanf("%d", &arr[i]))
@@ -43,12 +43,8 @@ int input_arr(int *arr)
         else
             exit = 0;
     }
-
-    rc = scanf("%d", &tmp);
-    if (rc != EOF && i == 10 && rc != 1)
-        return 0;
     
-    if (exit && i != 0)
+    if (exit && i != 0 && scanf("%d", &tmp))
         return OVERFLOW;
     return i;
 }
