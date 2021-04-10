@@ -1,0 +1,11 @@
+Input matrix size M x N:
+Input elements of the matrix:
+0 0 
+0 0 
+0 0 
+0 0 
+0 0 
+0 0 
+0 0 
+0 0 
+0 0 
