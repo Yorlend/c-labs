@@ -51,7 +51,6 @@ void print_mx(int (*mx)[N], int row, int col)
             printf("%d ", mx[i][j]);
         printf("\n");
     }
-            
 }
 
 void form_array(int (*mx)[N], int row, int col, int *arr)
