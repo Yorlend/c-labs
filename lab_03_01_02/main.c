@@ -35,12 +35,17 @@ void form_array(int *arr, int (*mx)[N], int row, int col)
 
 int check_col(int (*mx)[N], int row, int col_to_check)
 {
-    int res = 1;
+    int res = 0;
     for (int i = 0; i < row - 1; i++)
+    {
+        res = 1;
         if (mx[i][col_to_check] * mx[i + 1][col_to_check] >= 0)
+        {
             res = 0;
-    return res;
-    
+            break;
+        }
+    }
+    return res;    
 }
 
 int input_mx(int (*mx)[N], int *row, int *col)
