@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define M 10
 #define N 10
@@ -54,6 +55,7 @@ int analyze_row(int (*mx)[N], int row, int col)
 
 int digit_sum(int num)
 {
+    num = abs(num);
     int result = 0;
     while (num > 0)
     {
