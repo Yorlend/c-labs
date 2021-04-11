@@ -46,7 +46,7 @@ int input_mx(int (*mx)[N], int *row, int *col)
 int aux_diag(int mx[][N], int row, int col)
 {
     (void) row;
-    int top = 1;
+    int top = 0;
     int max = INT_MIN;
     
     for (int i = col - 1; i > -1; i--)
