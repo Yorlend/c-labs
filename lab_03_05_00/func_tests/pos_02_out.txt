@@ -1,0 +1,5 @@
+Input matrix size M x N:
+Input elements of the matrix:
+23 19 17 
+13 11 7 
+5 3 2 
