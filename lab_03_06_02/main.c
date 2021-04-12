@@ -29,11 +29,11 @@ int input_mx(int (*mx)[N], int *row, int *col)
 
     mx[0][0] = *row * *col - *row + 1;
     for (int i = 1; i < *row; i++)
-        mx[i][0] = mx[i-1][0] + 1;
+        mx[i][0] = mx[i - 1][0] + 1;
     for (int i = 0; i < *row; i++)
         for (int j = 1; j < *col; j++)
-            mx[i][j] = mx[i][j-1] - 1 - 2 * (i * (j % 2) +
-            (*row - 1 - i) * ((j + 1) % 2));
+            mx[i][j] = mx[i][j - 1] - 1 - 2 * (i * (j % 2) +
+                (*row - 1 - i) * ((j + 1) % 2));
 
     return SUCCESS;
 }
