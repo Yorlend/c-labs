@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <limits.h>
 
 #define N 10
@@ -45,15 +46,16 @@ int input_mx(int (*mx)[N], int *row, int *col)
 
 int aux_diag(int mx[][N], int row, int col)
 {
-    (void) row;
-    int top = 0;
+    int top = 1;
     int max = INT_MIN;
     
-    for (int i = col - 1; i > -1; i--)
+    for (int i = row - 1; i > -1; i--)
     {
         for (int j = top; j < col; j++)
-            if (mx[j][i] % 10 == 5 && mx[j][i] > max)
+        {
+            if (abs(mx[j][i]) % 10 == 5 && mx[j][i] > max)
                 max = mx[j][i];
+        }
         top++;
     }
 
