@@ -22,7 +22,7 @@ char *my_strpbrk(const char *str1, const char *str2)
 char *my_strrchr(const char *str, int c)
 {
     int str_length = my_strlen(str);
-    for (int i = str_length - 1; i >= 0; i--)
+    for (int i = str_length; i >= 0; i--)
         if (str[i] == c)
             return (char*)(str + i);
         

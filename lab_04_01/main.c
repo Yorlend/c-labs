@@ -5,7 +5,11 @@
 
 int main(void)
 {
-   test_my_string();
+    test_my_string();
+    const char *str1 = "abc";
+    char *str = my_strrchr(str1, 0);
 
-   return 0;
+    printf("%s\n", str);
+
+    return 0;
 }
