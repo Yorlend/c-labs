@@ -1,0 +1,2 @@
+no such words will be in next string
+123 some random text

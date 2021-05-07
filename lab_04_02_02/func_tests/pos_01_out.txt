@@ -1,0 +1,6 @@
+Result: some yes
+random no
+string yes
+to yes
+be yes
+checked no
