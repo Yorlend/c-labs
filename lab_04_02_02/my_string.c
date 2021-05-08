@@ -104,7 +104,10 @@ int check_entries(const char *str1, const char *str2)
         len_words2++;
     }
 
-    printf("Result:\n");
+    if (!len_words2)
+        return 1;
+
+    printf("Result: \n");
     for (int i = 0; i < len_words1; i++)
     {
         found = 0;
