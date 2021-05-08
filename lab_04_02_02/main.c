@@ -11,7 +11,7 @@ int main(void)
     char str2[MAX_STR_LEN];
 
     if (fgets(str1, MAX_STR_LEN, stdin) == NULL ||\
-    fgets(str2, MAX_STR_LEN, stdin) == NULL)
+        fgets(str2, MAX_STR_LEN, stdin) == NULL)
         exit_code = ERROR;
 
     if (!exit_code)

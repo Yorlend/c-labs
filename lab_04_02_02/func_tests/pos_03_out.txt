@@ -1,5 +1,4 @@
-Result: 
-no no
+Result:no no
 such no
 words no
 will no

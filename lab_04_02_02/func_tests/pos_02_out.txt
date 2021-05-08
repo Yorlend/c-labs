@@ -1,5 +1,4 @@
-Result: 
-all yes
+Result:all yes
 the yes
 words yes
 will yes
