@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdio.h>
 
+#define DELIMS " ,;:-.!?"
+
 int my_strlen(const char *str)
 {
     int len = 0;
@@ -81,33 +83,33 @@ int check_entries(const char *str1, const char *str2)
     char *mod_str1 = (char *)str1;
     char *mod_str2 = (char *)str2;
 
-    char *word1 = my_strtok(mod_str1, " ");
+    char *word1 = my_strtok(mod_str1, DELIMS);
     while (word1)
     {
         if (my_strlen(word1) > 16)
             return 1;
         strncpy(words1[len_words1], word1, 17);
-        word1 = my_strtok(NULL, " ");
+        word1 = my_strtok(NULL, DELIMS);
         len_words1++;
     }
 
     if (!len_words1)
         return 1;
 
-    char *word2 = my_strtok(mod_str2, " ");
+    char *word2 = my_strtok(mod_str2, DELIMS);
     while (word2)
     {
         if (my_strlen(word2) > 16)
             return 1;
         strncpy(words2[len_words2], word2, 17);
-        word2 = my_strtok(NULL, " ");
+        word2 = my_strtok(NULL, DELIMS);
         len_words2++;
     }
 
     if (!len_words2)
         return 1;
 
-    printf("Result:");
+    printf("Result: \n");
     for (int i = 0; i < len_words1; i++)
     {
         found = 0;
