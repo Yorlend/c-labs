@@ -25,29 +25,42 @@ int delete_newline(char *str)
 char *my_strtok(char *str, const char *delim)
 {
     static int flag = 0;
-    static char* _str = NULL;
+    static char *loc_str = NULL;
     if (str)
     {
-        _str = str;
+        loc_str = str;
+        for (const char *delim_char = delim; *delim_char != '\0';)
+        {
+            if (*loc_str == *delim_char)
+            {
+                loc_str++;
+                delim_char = delim;
+            }
+            else
+                delim_char++;
+        }
         flag = 0;
     }
 
-    for (char *c = _str; *c != '\0'; c++)
+    for (char *c = loc_str; *c != '\0'; c++)
     {
         for (const char *delim_char = delim; *delim_char != '\0'; delim_char++)
         {
             if (*c == *delim_char)
             {
                 *c = '\0';
-                str = _str;
-                _str = c + 1;
-                return str;
+                if (*(c + 1) != *delim_char && *(c + 1) != '\0')
+                {
+                    str = loc_str;
+                    loc_str = c + 1;
+                    return str;
+                }
             }
 
             if (*(c + 1) == '\0' && !flag)
             {
                 flag = 1;
-                return _str;
+                return loc_str;
             }
         }
     }
@@ -62,8 +75,8 @@ int check_entries(const char *str1, const char *str2)
     int repeat_flag = 0;
     int found = 0;
 
-    char words1[MAX_WORD_LEN][MAX_WORDS_COUNT];
-    char words2[MAX_WORD_LEN][MAX_WORDS_COUNT];
+    char words1[MAX_WORD_LEN][MAX_WORDS_COUNT] = { "0" };
+    char words2[MAX_WORD_LEN][MAX_WORDS_COUNT] = { "0" };
 
     char *mod_str1 = (char *)str1;
     char *mod_str2 = (char *)str2;
@@ -78,6 +91,9 @@ int check_entries(const char *str1, const char *str2)
         len_words1++;
     }
 
+    if (!len_words1)
+        return 1;
+
     char *word2 = my_strtok(mod_str2, " ");
     while (word2)
     {
@@ -88,7 +104,7 @@ int check_entries(const char *str1, const char *str2)
         len_words2++;
     }
 
-    printf("Result: ");
+    printf("Result:\n");
     for (int i = 0; i < len_words1; i++)
     {
         found = 0;

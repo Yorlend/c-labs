@@ -15,4 +15,4 @@ $(OBJECTS): %.o : %.c
 	$(CC) $(CFLAGS) -o $@ -c $^
 
 clean:
-	rm -rf a.exe *.o *.gcda *.gcno temp.txt
+	rm -rf a.exe *.o *.gcda *.gcno temp.txt gcov *.txt .vscode

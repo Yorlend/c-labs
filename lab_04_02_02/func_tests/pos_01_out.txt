@@ -1,4 +1,5 @@
-Result: some yes
+Result:
+some yes
 random no
 string yes
 to yes
