@@ -24,50 +24,60 @@ int delete_newline(char *str)
     return 1;
 }
 
-char *my_strtok(char *str, const char *delim)
-{
-    static int flag = 0;
-    static char *loc_str = NULL;
-    if (str)
+char *my_strtok(char *str, const char *delimiters)
+{ 
+    static char *position = NULL;
+    int i = 0;
+    int len = my_strlen(delimiters);
+ 
+    if (!str && !position)
+        return NULL;
+
+    if (str && !position)
+        position = str;
+
+    char *p_start = position;
+    while (1)
     {
-        loc_str = str;
-        for (const char *delim_char = delim; *delim_char != '\0';)
+        for (i = 0; i < len; i++)
         {
-            if (*loc_str == *delim_char)
+            if (*p_start == delimiters[i])
             {
-                loc_str++;
-                delim_char = delim;
+                p_start++;
+                break;
             }
-            else
-                delim_char++;
         }
-        flag = 0;
-    }
-
-    for (char *c = loc_str; *c != '\0'; c++)
-    {
-        for (const char *delim_char = delim; *delim_char != '\0'; delim_char++)
+ 
+        if (i == len) 
         {
-            if (*c == *delim_char)
-            {
-                *c = '\0';
-                if (*(c + 1) != *delim_char && *(c + 1) != '\0')
-                {
-                    str = loc_str;
-                    loc_str = c + 1;
-                    return str;
-                }
-            }
-
-            if (*(c + 1) == '\0' && !flag)
-            {
-                flag = 1;
-                return loc_str;
-            }
+            position = p_start;
+            break;
         }
     }
 
-    return NULL;
+    if (*position == '\0')
+    {
+        position = NULL;
+        return position;
+    }
+ 
+    while (*position != '\0')
+    {
+        for (i = 0; i < len; i++)
+        {
+            if (*position == delimiters[i])
+            {
+                *position = '\0';
+                break;
+            }
+        }
+ 
+        position++;
+        if (i < len)
+            break;
+    }
+ 
+    return p_start;
 }
 
 int check_entries(const char *str1, const char *str2)

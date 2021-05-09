@@ -8,5 +8,6 @@ char *my_strtok(char *str, const char *delim);
 int check_entries(const char *str1, const char *str2);
 int delete_newline(char *str);
 int my_strlen(const char *str);
+int check_char(const char ch, const char *delim);
 
 #endif
