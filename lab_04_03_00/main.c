@@ -24,6 +24,8 @@ int main(void)
 
     if (!exit_code)
     {
+        for (int i = 0; i < size; i++)
+            remove_first(words[i]);
         join(str, words, size);
         printf("Result: %s\n", str);
     }
