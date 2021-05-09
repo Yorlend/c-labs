@@ -17,7 +17,7 @@ bool check_date(date_t date)
     if (date.month < 0 || date.month > 11)
         return DATE_WRONG;
 
-    if (date.year < 0 || date.year > 9999)
+    if (date.year < 1000 || date.year > 9999)
         return DATE_WRONG;
 
     if (date.month == 1)
@@ -44,10 +44,10 @@ bool parse_date(date_t *date, char **str)
     char month[MAX_WORD_LEN];
 
     date_t res;
-    if (!parse_uint(&res.day, &tmp) ||\
-        !parse_space(&tmp) ||\
-        !parse_word(month, &tmp) ||\
-        !parse_space(&tmp) ||\
+    if (!parse_uint(&res.day, &tmp) || \
+        !parse_space(&tmp) || \
+        !parse_word(month, &tmp) || \
+        !parse_space(&tmp) || \
         !parse_uint(&res.year, &tmp))
         return false;
     

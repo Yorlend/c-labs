@@ -23,8 +23,7 @@ int main(void)
     {
         char *pstr = str;
         date_t date = { 0, 0, 0 };
-        if (!parse_space_mb(&pstr) ||\
-            !parse_date(&date, &pstr) ||\
+        if (!parse_space_mb(&pstr) || !parse_date(&date, &pstr) || \
             !parse_space_mb(&pstr))
             printf("NO\n");
         else

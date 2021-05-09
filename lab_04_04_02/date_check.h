@@ -7,7 +7,8 @@
 #define DATE_CORRECT true
 #define DATE_WRONG false
 
-typedef struct {
+typedef struct
+{
     int day;
     int month;
     int year;
