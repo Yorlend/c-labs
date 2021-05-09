@@ -17,7 +17,7 @@ typedef struct
 
 bool is_leap_year(int year);
 bool check_date(date_t date);
-bool parse_date(date_t *date, char **str);
+bool parse_date_raw(date_t *date, char **str);
 int convert_month(char *str_month);
 
 #endif

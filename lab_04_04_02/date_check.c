@@ -38,26 +38,23 @@ bool check_date(date_t date)
     return DATE_CORRECT;
 }
 
-bool parse_date(date_t *date, char **str)
+bool parse_date_raw(date_t *date, char **str)
 {
     char *tmp = *str;
     char month[MAX_WORD_LEN];
 
     date_t res;
     if (!parse_uint(&res.day, &tmp) || \
-        !parse_space(&tmp) || \
-        !parse_word(month, &tmp) || \
-        !parse_space(&tmp) || \
-        !parse_uint(&res.year, &tmp))
+ !parse_space(&tmp) || \
+ !parse_word(month, &tmp) || \
+ !parse_space(&tmp) || \
+ !parse_uint(&res.year, &tmp))
         return false;
     
     for (size_t i = 0; i < strlen(month); i++)
         month[i] = tolower(month[i]);
 
     res.month = convert_month(month);
-
-    if (!check_date(res))
-        return false;
     
     *date = res;
     *str = tmp;
