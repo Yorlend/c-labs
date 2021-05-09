@@ -29,7 +29,12 @@ int main(void)
             if (parse_date_raw(&date, &pstr))
             {
                 if (!check_date(date))
+                {
+                    int num;
+                    pstr = c;
+                    parse_uint(&num, &pstr);
                     c = pstr - 1;
+                }
                 else
                 {
                     flag = 1;
