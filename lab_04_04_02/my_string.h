@@ -24,8 +24,7 @@ int split_str(char (*str_array)[MAX_WORD_LEN], int *size, char *str);
 bool parse_uint(int *value, char **str);
 bool parse_char(char **str, char chr);
 bool parse_word(char *word, char **str);
-bool parse_wspace(char **str);
-bool parse_wspace_p(char **str);
-bool parse_wspace_s(char **str);
+bool parse_space(char **str);
+bool parse_space_mb(char **str);
 
 #endif
