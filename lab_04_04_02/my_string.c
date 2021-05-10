@@ -78,9 +78,9 @@ bool parse_word(char *word, char **str)
 
 bool parse_space(char **str)
 {
-    if (!parse_char(str, ' ') && !parse_char(str, '\t'))
+    if (!parse_char(str, ' '))
         return false;
-    while (parse_char(str, ' ') || parse_char(str, '\t'));
+    while (parse_char(str, ' '));
 
     return true;
 }
