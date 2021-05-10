@@ -78,16 +78,16 @@ bool parse_word(char *word, char **str)
 
 bool parse_space(char **str)
 {
-    if (!parse_char(str, ' '))
+    if (!parse_char(str, ' ') && !parse_char(str, '\t'))
         return false;
-    while (parse_char(str, ' '));
+    while (parse_char(str, ' ') || parse_char(str, '\t'));
 
     return true;
 }
 
 bool parse_space_mb(char **str)
 {
-    while (parse_char(str, ' '));
+    while (parse_char(str, ' ') || parse_char(str, '\t'));
 
     return true;
 }
