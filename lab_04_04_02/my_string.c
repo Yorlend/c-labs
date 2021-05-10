@@ -76,18 +76,27 @@ bool parse_word(char *word, char **str)
     return true;
 }
 
-bool parse_space(char **str)
+bool parse_space_mb(char **str)
 {
-    if (!parse_char(str, ' '))
-        return false;
-    while (parse_char(str, ' '));
+    while (parse_char(str, ' ') \
+        || parse_char(str, '\t') \
+        || parse_char(str, '\v') \
+        || parse_char(str, '\n') \
+        || parse_char(str, '\f') \
+        || parse_char(str, '\r'));
 
     return true;
 }
 
-bool parse_space_mb(char **str)
+bool parse_space(char **str)
 {
-    while (parse_char(str, ' ') || parse_char(str, '\t'));
+    if (!parse_char(str, ' ') \
+        && !parse_char(str, '\t') \
+        && !parse_char(str, '\v') \
+        && !parse_char(str, '\n') \
+        && !parse_char(str, '\f') \
+        && !parse_char(str, '\r'))
+        return false;
 
-    return true;
+    return parse_space_mb(str);
 }
