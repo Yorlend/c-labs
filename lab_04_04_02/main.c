@@ -7,17 +7,17 @@ int main(void)
 {
     int exit_code = SUCCESS;
     char str[MAX_STR_LEN] = "";
-    char split_s[MAX_STR_LEN] = "";    
+    // char split_s[MAX_STR_LEN] = "";
 
-    char words[MAX_WORDS_COUNT][MAX_WORD_LEN];
-    int size = 0;
+    // char words[MAX_WORDS_COUNT][MAX_WORD_LEN];
+    // int size = 0;
 
     exit_code = input_string(str);
 
-    strncpy(split_s, str, MAX_STR_LEN);
+    // strncpy(split_s, str, MAX_STR_LEN);
 
-    if (!exit_code)
-        exit_code = split_str(words, &size, split_s);
+    // if (!exit_code)
+    //     exit_code = split_str(words, &size, split_s);
 
     if (!exit_code)
     {

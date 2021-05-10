@@ -44,11 +44,11 @@ bool parse_date_raw(date_t *date, char **str)
     char month[MAX_WORD_LEN];
 
     date_t res;
-    if (!parse_uint(&res.day, &tmp) ||\
-        !parse_space(&tmp) ||\
-        !parse_word(month, &tmp) ||\
-        !parse_space(&tmp) ||\
-        !parse_uint(&res.year, &tmp))
+    if (!parse_uint(&res.day, &tmp) \
+        || !parse_space(&tmp) \
+        || !parse_word(month, &tmp) \
+        || !parse_space(&tmp) \
+        || !parse_uint(&res.year, &tmp))
         return false;
     
     for (size_t i = 0; i < strlen(month); i++)
