@@ -17,7 +17,7 @@ bool check_date(date_t date)
     if (date.month < 0 || date.month > 11)
         return DATE_WRONG;
 
-    if (date.year < 1000 || date.year > 9999)
+    if (date.year <= 0 || date.year > 9999)
         return DATE_WRONG;
 
     if (date.month == 1)
