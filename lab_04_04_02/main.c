@@ -24,7 +24,8 @@ int main(void)
         date_t date = { 0, 0, 0 };
         char *pstr = str;
         if (parse_space_mb(&pstr) && parse_date_raw(&date, &pstr) \
-            && check_date(date) && parse_space_mb(&pstr))
+            && check_date(date) && parse_space_mb(&pstr) \
+            && *pstr == '\0')
             printf("YES\n");
         else
             printf("NO\n");
