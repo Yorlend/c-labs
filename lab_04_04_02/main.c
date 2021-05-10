@@ -21,31 +21,13 @@ int main(void)
 
     if (!exit_code)
     {
-        int flag = 0;
         date_t date = { 0, 0, 0 };
-        for (char *c = str; *c != '\0'; c++)
-        {
-            char *pstr = c;
-            if (parse_date_raw(&date, &pstr))
-            {
-                if (!check_date(date))
-                {
-                    int num;
-                    pstr = c;
-                    parse_uint(&num, &pstr);
-                    c = pstr - 1;
-                }
-                else
-                {
-                    flag = 1;
-                    break;
-                }
-            }
-        }
-        if (!flag)
-            printf("NO\n");
-        else
+        char *pstr = str;
+        if (parse_space_mb(&pstr) && parse_date_raw(&date, &pstr) \
+            && check_date(date) && parse_space_mb(&pstr))
             printf("YES\n");
+        else
+            printf("NO\n");
     }
 
     return exit_code;
