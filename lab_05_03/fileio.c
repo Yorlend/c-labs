@@ -16,7 +16,11 @@ int output_file(FILE *f)
     if (f == NULL)
         return EXIT_FAILURE;
 
-    fseek(f, 0, SEEK_SET);
+    size_t size = 0;
+    get_quantity(f, &size);
+    
+    if (size < 1)
+        return EXIT_FAILURE;
 
     int num = 0;
 

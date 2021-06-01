@@ -43,5 +43,5 @@ int main(int argc, char *argv[])
         return exit_code;
     }
 
-    return EXIT_SUCCESS;
+    return EXIT_FAILURE;
 }

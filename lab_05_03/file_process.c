@@ -49,6 +49,9 @@ int sort_file(FILE *file)
     int exit_code = EXIT_SUCCESS;
     exit_code = get_quantity(file, &size);
 
+    if (size < 1)
+        return EXIT_FAILURE;
+
     int num = 0, first = 0;
     for (size_t i = 0; i < size; i++)
     {
