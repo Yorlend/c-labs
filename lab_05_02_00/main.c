@@ -16,6 +16,8 @@ int main(int argc, char *argv[])
     {
         file = fopen(argv[1], "r");
         exit_code = process(file, &res);
+        if (file != NULL)
+            fclose(file);
     }
 
     if (!exit_code)
