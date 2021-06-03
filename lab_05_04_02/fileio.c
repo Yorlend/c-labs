@@ -85,6 +85,9 @@ int read_file(FILE *file, product_t *res, int *size)
     if (feof(file) && exit_code != INVALID_UINT)
         exit_code = SUCCESS;
 
+    if (*size == 0)
+        exit_code = INVALID_FILE;
+
     return exit_code;
 }
 
