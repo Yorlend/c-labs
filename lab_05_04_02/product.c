@@ -85,7 +85,7 @@ int sort_file(FILE *fsrc, FILE *fdest)
  * 
  * \return ERROR CODE
  */
-int add_unit(char *filename, product_t *unit)
+int add_unit(char *filename)
 {
     int exit_code = SUCCESS;
     FILE *f = fopen(filename, "r");
@@ -102,10 +102,14 @@ int add_unit(char *filename, product_t *unit)
     if (f != NULL)
         fclose(f);
 
+    product_t prod_in;
+    if (!exit_code)
+        exit_code = read_product(stdin, &prod_in);
+
     if (!exit_code)
     {
-        insert_product(goods, &size, unit);
-                
+        insert_product(goods, &size, &prod_in);
+
         f = fopen(filename, "w");
         exit_code = write_file(f, goods, size);
 

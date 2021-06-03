@@ -37,13 +37,7 @@ int main(int argc, char *argv[])
         if (argc < 3)
             return INVALID_CLARGS;
 
-        product_t input;
-        int exit_code = read_product(stdin, &input);
-
-        if (!exit_code)
-            exit_code = add_unit(argv[2], &input);
-
-        return exit_code;
+        return add_unit(argv[2]);
     }
 
     return INVALID_CLARGS;

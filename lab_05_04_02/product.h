@@ -15,6 +15,6 @@ typedef struct
 } product_t;
 
 int sort_file(FILE *fsrc, FILE *fdest);
-int add_unit(char *filename, product_t *unit);
+int add_unit(char *filename);
 
 #endif
