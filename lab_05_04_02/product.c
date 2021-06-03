@@ -3,8 +3,6 @@
 #include "constants.h"
 #include <stdlib.h>
 
-#include <string.h>
-
 /**
  * compares two product_t structs by price
  * 
