@@ -135,7 +135,7 @@ int write_file(FILE *file, product_t *res, int size)
     for (int i = 0; i < size; i++)
     {
         if (fprintf(file, "%s\n%s\n%u\n%u\n", res[i].name, \
-            res[i].manufacturer, res[i].price, res[i].quantity) < 0)
+        res[i].manufacturer, res[i].price, res[i].quantity) < 0)
             return INVALID_DATA;
     }
     return SUCCESS;

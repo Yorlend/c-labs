@@ -39,12 +39,13 @@ static void swap(product_t *a, product_t *b)
 static void insert_product(product_t *arr, int *size, product_t *unit)
 {
     int flag = 0;
+    arr[*size] = *unit;
     (*size)++;
     for (int i = 0; i < *size; i++)
     {
         if (flag == 0 && product_compare(&arr[i], unit) > 0)
             flag = 1;
-        
+
         if (flag)
             swap(&arr[i], unit);
     }
