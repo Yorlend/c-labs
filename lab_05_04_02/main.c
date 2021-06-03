@@ -10,11 +10,13 @@ int main(int argc, char *argv[])
 {
     FILE *f = NULL;
 
-    if (argc < 3)
+    if (argc < 2)
         return INVALID_CLARGS;
 
     if (!strcmp(argv[1], "st"))
     {
+        if (argc < 4)
+            return INVALID_CLARGS;
         FILE *fdest = NULL;
         int exit_code = SUCCESS;
         f = fopen(argv[2], "r");
@@ -32,6 +34,8 @@ int main(int argc, char *argv[])
 
     if (!strcmp(argv[1], "at"))
     {
+        if (argc < 3)
+            return INVALID_CLARGS;
         int exit_code;
         product_t input;
         exit_code = read_product(stdin, &input);

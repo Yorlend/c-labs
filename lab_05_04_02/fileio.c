@@ -12,12 +12,12 @@
  * 
  * \return ERROR CODE
  */
-static int input_string(FILE *file, char *str)
+static int input_string(FILE *file, char *str, int buf)
 {
     if (file == NULL)
         return INVALID_FILE;
 
-    if (fgets(str, MAX_STR_LEN, file) == NULL)
+    if (fgets(str, buf, file) == NULL)
         return INVALID_DATA;
 
     while (isspace(*str++));
@@ -49,7 +49,7 @@ static int input_price(FILE *file, uint32_t *price)
 
     char tmp[MAX_STR_LEN];
     char *ptr = NULL;
-    if (input_string(file, tmp))
+    if (input_string(file, tmp, MAX_STR_LEN))
         return INVALID_DATA;
 
     *price = strtoul(tmp, &ptr, NUM_BASE);
@@ -102,15 +102,24 @@ int read_product(FILE *file, product_t *prod)
         return INVALID_FILE;
 
     char unit_name[MAX_STR_LEN];
+    char manufacturer[MAX_MAN_LEN];
     uint32_t unit_price = 0;
+    uint32_t unit_quant = 0;
     
-    if (input_string(file, unit_name))
+    if (input_string(file, unit_name, MAX_STR_LEN))
+        return INVALID_DATA;
+    if (input_string(file, manufacturer, MAX_MAN_LEN))
         return INVALID_DATA;
     if (input_price(file, &unit_price))
         return INVALID_UINT;
+    if (input_price(file, &unit_quant))
+        return INVALID_UINT;
 
     strcpy(prod->name, unit_name);
+    strcpy(prod->manufacturer, manufacturer);
     prod->price = unit_price;
+    prod->quantity = unit_quant;
+
 
     return SUCCESS;
 }
@@ -125,7 +134,8 @@ int write_file(FILE *file, product_t *res, int size)
 
     for (int i = 0; i < size; i++)
     {
-        if (fprintf(file, "%s\n%u\n", res[i].name, res[i].price) < 1)
+        if (fprintf(file, "%s\n%s\n%u\n%u\n", res[i].name,\
+            res[i].manufacturer, res[i].price, res[i].quantity) < 3)
             return INVALID_DATA;
     }
     return SUCCESS;

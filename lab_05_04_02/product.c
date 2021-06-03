@@ -19,6 +19,8 @@ static int product_compare(const void *a, const void *b)
     product_t *prod_b = (product_t *)b;
 
     int res = (int)(prod_b->price - prod_a->price);
+    if (res == 0)
+        res = (int)(prod_b->quantity - prod_a->quantity);
 
     return res;
 }
