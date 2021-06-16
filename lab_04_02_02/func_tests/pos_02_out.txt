@@ -1,0 +1,9 @@
+Result: 
+all yes
+the yes
+words yes
+will yes
+be yes
+in yes
+next yes
+string yes
