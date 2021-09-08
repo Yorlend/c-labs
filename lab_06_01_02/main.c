@@ -8,28 +8,28 @@
 
 int main(int argc, char **argv)
 {
-    status_t exit_code = SUCCESS;
+    status_t exit_code = success;
     FILE *f = NULL;
 
     if (argc < 2)
-        exit_code = CMD_ARGS_ERROR;
+        exit_code = cmd_args_error;
 
-    if (exit_code == SUCCESS)
+    if (exit_code == success)
     {
         if (!exit_code)
             f = fopen(argv[1], "r");
         
         if (f == NULL)
-            exit_code = FILE_IO_ERROR;
+            exit_code = file_io_error;
     }
 
     int items_len = 0;
     item_t items[STRUCT_MAX];
 
-    if (exit_code == SUCCESS)
+    if (exit_code == success)
         exit_code = read_items(f, items, &items_len);
 
-    if (exit_code == SUCCESS)
+    if (exit_code == success)
     {
         if (argc < 3)
         {

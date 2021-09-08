@@ -19,6 +19,6 @@ void display_item(FILE *file, const item_t *item);
 void display_items(FILE *file, const item_t *items, int n);
 
 status_t display_startswith(FILE *file, const item_t *items, int n, \
-    const char *sub);
+const char *sub);
 
 #endif // FILE_IO_H

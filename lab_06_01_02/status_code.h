@@ -3,11 +3,11 @@
 
 typedef enum
 {
-    SUCCESS,
-    CMD_ARGS_ERROR,
-    INPUT_ERROR,
-    FILE_IO_ERROR,
-    SEARCH_ERROR
+    success,
+    cmd_args_error,
+    input_error,
+    file_io_error,
+    search_error
 } status_t;
 
 #endif // STATUS_CODE_H

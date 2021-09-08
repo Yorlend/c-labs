@@ -19,55 +19,61 @@ status_t input_string(FILE *file, char *str, int buf_size)
     char *p = NULL;
 
     if (!fgets(str, buf_size, file) || !(p = strchr(str, '\n')))
-        return INPUT_ERROR;
+        return input_error;
 
     *p = '\0';
 
-    return SUCCESS;
+    return success;
 }
 
 status_t input_double(FILE *file, double *num)
 {
     char buf[DBL_MAX_10_EXP + 2];
+    char* end_ptr = NULL;
 
-    if (input_string(file, buf, DBL_MAX_10_EXP + 2) != SUCCESS)
-        return INPUT_ERROR;
+    if (input_string(file, buf, DBL_MAX_10_EXP + 2) != success)
+        return input_error;
 
-    *num = atof(buf);
+    *num = strtod(buf, &end_ptr);
 
-    return SUCCESS;
+    if (*end_ptr != 0)
+        return input_error;
+
+    return success;
 }
 
 status_t read_item(FILE *file, item_t *item)
 {
-    if (input_string(file, item->name, STR_MAX) != SUCCESS \
+    if (input_string(file, item->name, STR_MAX) != success \
         || input_double(file, &item->weight) \
         || input_double(file, &item->volume))
-        return INPUT_ERROR;
+        return input_error;
 
     if (!validate_item(item))
-        return INPUT_ERROR;
+        return input_error;
 
-    return SUCCESS;
+    return success;
 }
 
 status_t read_items(FILE *file, item_t *items, int *n)
 {
-    status_t status = SUCCESS;
+    status_t status = success;
     *n = 0;
 
     if (file_is_empty(file))
-        return FILE_IO_ERROR;
+        return file_io_error;
 
-    while (!feof(file) && status == SUCCESS)
+    while (!feof(file) && status == success)
     {
+        if (*n >= STRUCT_MAX)
+            return file_io_error;
         status = read_item(file, &items[*n]);
-        if (status == SUCCESS)
+        if (status == success)
             ++*n;
     }
 
     if (feof(file))
-        return SUCCESS;
+        return success;
     
     return status;
 }
@@ -84,7 +90,7 @@ void display_items(FILE *file, const item_t *items, int n)
 }
 
 status_t display_startswith(FILE *file, const item_t *items, int n, \
-    const char *sub)
+const char *sub)
 {
     bool flag = false;
 
@@ -96,6 +102,6 @@ status_t display_startswith(FILE *file, const item_t *items, int n, \
         }
     
     if (!flag)
-        return SEARCH_ERROR;
-    return SUCCESS;
+        return search_error;
+    return success;
 }
