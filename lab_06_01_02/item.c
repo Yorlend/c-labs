@@ -33,7 +33,7 @@ bool starts_with(const item_t *item, const char *sub)
     return true;
 }
 
-int compare_items(const item_t *item_1, const item_t *item_2)
+double compare_items(const item_t *item_1, const item_t *item_2)
 {
     double density_1 = get_density(item_1);
     double density_2 = get_density(item_2);

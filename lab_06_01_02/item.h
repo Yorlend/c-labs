@@ -17,7 +17,7 @@ bool starts_with(const item_t *item, const char *sub);
 
 double get_density(const item_t *item);
 
-int compare_items(const item_t *item_1, const item_t *item_2);
+double compare_items(const item_t *item_1, const item_t *item_2);
 void swap_items(item_t *item_1, item_t *item_2);
 void sort_items(item_t *items, int n);
 

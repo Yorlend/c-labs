@@ -87,7 +87,6 @@ void display_items(FILE *file, const item_t *items, int n)
 {
     for (int i = 0; i < n; i++)
         display_item(file, &items[i]);
-    printf("\n");
 }
 
 status_t display_startswith(FILE *file, const item_t *items, int n, \
