@@ -80,7 +80,9 @@ status_t read_items(FILE *file, item_t *items, int *n)
 
 void display_item(FILE *file, const item_t *item)
 {
-    fprintf(file, "%s\n%lf\n%lf\n", item->name, item->weight, item->volume);
+    fprintf(file, "%s\n", item->name);
+    fprintf(file, "%.6lf\n", item->weight);
+    fprintf(file, "%.6lf\n", item->volume);
 }
 
 void display_items(FILE *file, const item_t *items, int n)
