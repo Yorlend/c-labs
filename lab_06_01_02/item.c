@@ -38,7 +38,7 @@ int compare_items(const item_t *item_1, const item_t *item_2)
     double density_1 = get_density(item_1);
     double density_2 = get_density(item_2);
 
-    return density_1 < density_2;
+    return density_1 - density_2;
 }
 
 void swap_items(item_t *item_1, item_t *item_2)
@@ -52,6 +52,6 @@ void sort_items(item_t *items, int n)
 {
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n - 1; j++)
-            if (compare_items(&items[j], &items[j + 1]) <= 0)
+            if (compare_items(&items[j], &items[j + 1]) > 0)
                 swap_items(&items[j], &items[j + 1]);
 }

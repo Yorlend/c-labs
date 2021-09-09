@@ -28,10 +28,10 @@ status_t input_string(FILE *file, char *str, int buf_size)
 
 status_t input_double(FILE *file, double *num)
 {
-    char buf[DBL_MAX_10_EXP + 2];
-    char* end_ptr = NULL;
+    char buf[DIG_MAX];
+    char *end_ptr = NULL;
 
-    if (input_string(file, buf, DBL_MAX_10_EXP + 2) != success)
+    if (input_string(file, buf, DIG_MAX) != success)
         return input_error;
 
     *num = strtod(buf, &end_ptr);
@@ -87,6 +87,7 @@ void display_items(FILE *file, const item_t *items, int n)
 {
     for (int i = 0; i < n; i++)
         display_item(file, &items[i]);
+    printf("\n");
 }
 
 status_t display_startswith(FILE *file, const item_t *items, int n, \
