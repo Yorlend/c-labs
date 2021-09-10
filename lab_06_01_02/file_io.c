@@ -18,10 +18,11 @@ status_t input_string(FILE *file, char *str, int buf_size)
 {
     char *p = NULL;
 
-    if (!fgets(str, buf_size, file) || !(p = strchr(str, '\n')))
+    if (fgets(str, buf_size, file) == NULL || (int)strlen(str) > buf_size)
         return input_error;
 
-    *p = '\0';
+    if ((p = strchr(str, '\n')))
+        *p = '\0';
 
     return success;
 }
@@ -36,7 +37,7 @@ status_t input_double(FILE *file, double *num)
 
     *num = strtod(buf, &end_ptr);
 
-    if (*end_ptr != 0)
+    if (*end_ptr != '\0' && *end_ptr != '\n')
         return input_error;
 
     return success;
@@ -45,8 +46,8 @@ status_t input_double(FILE *file, double *num)
 status_t read_item(FILE *file, item_t *item)
 {
     if (input_string(file, item->name, STR_MAX) != success \
-        || input_double(file, &item->weight) \
-        || input_double(file, &item->volume))
+        || input_double(file, &item->weight) != success \
+        || input_double(file, &item->volume) != success)
         return input_error;
 
     if (!validate_item(item))
