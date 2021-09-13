@@ -1,0 +1,6 @@
+this is very long string that causes error
+123.12847621
+221.344
+product
+123.3
+183.333371
