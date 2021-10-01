@@ -2,11 +2,11 @@ CC := gcc
 CFLAGS := -std=c99 -Wall -Werror -Wpedantic -Wextra -Wvla -Wredundant-decls -Wsign-conversion -Iinclude
 LDFLAGS := -lm
 BASE_SRCS := $(shell find src -iname "*.c" ! -name "main.c")
-BASE_OBJS := $(BASE_SRCS:src/%.c=obj/%.o)
+BASE_OBJS := $(BASE_SRCS:src/%.c=out/%.o)
 MAIN_SRCS := src/main.c
-MAIN_OBJS := $(MAIN_SRCS:src/%.c=obj/%.o)
+MAIN_OBJS := $(MAIN_SRCS:src/%.c=out/%.o)
 UNIT_SRCS := $(wildcard unit_tests/*)
-UNIT_OBJS := $(UNIT_SRCS:unit_tests/%.c=obj/%.o)
+UNIT_OBJS := $(UNIT_SRCS:unit_tests/%.c=out/%.o)
 
 .PHONY: unit func clean sort_analysis
 
@@ -38,11 +38,11 @@ app.exe: $(BASE_OBJS) $(MAIN_OBJS)
 unit_tests.exe: $(BASE_OBJS) $(UNIT_OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-$(BASE_OBJS) $(MAIN_OBJS): obj/%.o : src/%.c
+$(BASE_OBJS) $(MAIN_OBJS): out/%.o : src/%.c
 	mkdir -p $(dir $@) && $(CC) $(CFLAGS) -o $@ -c $^
 
-$(UNIT_OBJS): obj/%.o : unit_tests/%.c
+$(UNIT_OBJS): out/%.o : unit_tests/%.c
 	mkdir -p $(dir $@) && $(CC) $(CFLAGS) -o $@ -c $^
 
 clean:
-	rm -rf *.exe obj
+	rm -rf *.exe out

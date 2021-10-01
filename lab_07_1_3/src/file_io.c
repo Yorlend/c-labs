@@ -5,7 +5,7 @@
 
 static status_t empty_file(FILE *f)
 {
-    fseek(f, 0, SEEK_END);
+    fseek(f, 0, 2);
     if (ftell(f) == 0)
         return file_error;
 
@@ -48,7 +48,7 @@ static status_t count_items(FILE *file, size_t *counter)
     *counter = 0;
     rewind(file);
 
-    while(!feof(file))
+    while (!feof(file))
         if (fscanf(file, "%d", &tmp) == 1)
             (*counter)++;
         else if (!feof(file))

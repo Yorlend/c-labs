@@ -26,6 +26,8 @@ int (*compar)(const void *, const void *))
 
     #ifdef QSORT
 
+    (void) barrier;
+    (void) swap;
     qsort(base, nitems, size, compar);
 
     #else
