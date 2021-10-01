@@ -34,7 +34,7 @@ qsort_analysis: app.exe
 app.exe: $(BASE_OBJS) $(MAIN_OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-unit_tests.exe: LDFLAGS += -lcheck -lpthread -lsubunit -lrt -lm
+unit_tests.exe: LDFLAGS += -lcheck -lpthread -lrt
 unit_tests.exe: $(BASE_OBJS) $(UNIT_OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
