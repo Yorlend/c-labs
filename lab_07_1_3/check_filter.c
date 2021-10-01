@@ -1,4 +1,5 @@
 #include <check.h>
+#include <stdlib.h>
 #include "filter.h"
 
 
@@ -40,6 +41,8 @@ START_TEST(full_result)
     ck_assert_int_eq(pb_dst[0], 3);
     ck_assert_int_eq(pb_dst[1], 4);
     ck_assert_int_eq(pb_dst[2], 2);
+
+    free(pb_dst);
 }
 END_TEST
 
@@ -55,6 +58,8 @@ START_TEST(partial_result)
     ck_assert_int_eq(pb_dst[0], 3);
     ck_assert_int_eq(pb_dst[1], 4);
     ck_assert_int_eq(pb_dst[2], 2);
+
+    free(pb_dst);
 }
 END_TEST
 
