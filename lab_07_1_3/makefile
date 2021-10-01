@@ -5,8 +5,8 @@ BASE_SRCS := $(shell find src -iname "*.c" ! -name "main.c")
 BASE_OBJS := $(BASE_SRCS:src/%.c=out/%.o)
 MAIN_SRCS := src/main.c
 MAIN_OBJS := $(MAIN_SRCS:src/%.c=out/%.o)
-UNIT_SRCS := $(wildcard unit_tests/*)
-UNIT_OBJS := $(UNIT_SRCS:unit_tests/%.c=out/%.o)
+UNIT_SRCS := $(wildcard check_*)
+UNIT_OBJS := $(UNIT_SRCS:%.c=out/%.o)
 
 .PHONY: unit func clean sort_analysis
 
@@ -17,7 +17,7 @@ debug: CFLAGS += -DDEBUG --coverage -O0
 debug: LDFLAGS += --coverage
 debug: app.exe
 
-unit: LDFLAGS += -lcheck -lpthread -lrt -lm
+unit: LDFLAGS += -lcheck -lpthread -lsubunit -lrt -lm
 unit: unit_tests.exe
 	./unit_tests.exe
 
@@ -41,7 +41,7 @@ unit_tests.exe: $(BASE_OBJS) $(UNIT_OBJS)
 $(BASE_OBJS) $(MAIN_OBJS): out/%.o : src/%.c
 	mkdir -p $(dir $@) && $(CC) $(CFLAGS) -o $@ -c $^
 
-$(UNIT_OBJS): out/%.o : unit_tests/%.c
+$(UNIT_OBJS): out/%.o : %.c
 	mkdir -p $(dir $@) && $(CC) $(CFLAGS) -o $@ -c $^
 
 clean:
