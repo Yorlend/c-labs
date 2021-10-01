@@ -20,7 +20,6 @@ int main(int argc, char *argv[])
     if (argc < 3)
         exit_code = args_error;
 
-
     if (exit_code == success)
         exit_code = input_array(argv[1], &array);
     

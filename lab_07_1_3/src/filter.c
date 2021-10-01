@@ -9,7 +9,7 @@ static const int *get_last_neg(const int *pb_src, const int *pe_src)
 
     while (pe_tmp-- > pb_src)
         if (*pe_tmp < 0)
-            return ++pe_tmp;
+            return pe_tmp;
     
     return pe_src;
 }

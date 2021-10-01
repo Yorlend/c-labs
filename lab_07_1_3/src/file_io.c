@@ -109,7 +109,11 @@ status_t output_array_fp(FILE *file, array_t *array)
     int *iter = array_begin(array);
     int *end = array_end(array);
     while (iter != end)
-        fprintf(file, "%d\n", *iter++);
+    {
+        fprintf(file, "%d", *iter++);
+        if (iter != end)
+            fprintf(file, " ");
+    }
 
     return success;
 }
