@@ -7,7 +7,6 @@ typedef enum
     file_error,
     args_error,
     input_error,
-
     filter_error,
     func_args_error,
     empty_array_error,

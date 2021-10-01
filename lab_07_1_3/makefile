@@ -17,7 +17,7 @@ debug: CFLAGS += -DDEBUG --coverage -O0
 debug: LDFLAGS += --coverage
 debug: app.exe
 
-unit: LDFLAGS += -lcheck -lpthread -lsubunit -lrt -lm
+unit: LDFLAGS += -lcheck -lpthread -lrt -lm
 unit: unit_tests.exe
 	./unit_tests.exe
 
