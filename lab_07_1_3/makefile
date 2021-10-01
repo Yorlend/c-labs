@@ -17,7 +17,6 @@ debug: CFLAGS += -DDEBUG --coverage -O0
 debug: LDFLAGS += --coverage
 debug: app.exe
 
-unit: LDFLAGS += -lcheck -lpthread -lsubunit -lrt -lm
 unit: unit_tests.exe
 	./unit_tests.exe
 
@@ -35,6 +34,7 @@ qsort_analysis: app.exe
 app.exe: $(BASE_OBJS) $(MAIN_OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
+unit_tests.exe: LDFLAGS += -lcheck -lpthread -lsubunit -lrt -lm
 unit_tests.exe: $(BASE_OBJS) $(UNIT_OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
