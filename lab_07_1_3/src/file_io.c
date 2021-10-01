@@ -2,7 +2,6 @@
 #include <string.h>
 
 
-
 static status_t empty_file(FILE *f)
 {
     fseek(f, 0, 2);

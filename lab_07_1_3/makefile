@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -std=c99 -Wall -Werror -Wpedantic -Wextra -Wvla -Wredundant-decls -Wsign-conversion -Iinclude
+CFLAGS := -std=c99 -Wall -Werror -Wpedantic -Wextra -Wvla -Wredundant-decls -Wsign-conversion -Iinc
 LDFLAGS := -lm
 BASE_SRCS := $(shell find src -iname "*.c" ! -name "main.c")
 BASE_OBJS := $(BASE_SRCS:src/%.c=out/%.o)
