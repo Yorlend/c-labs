@@ -5,6 +5,7 @@
 
 typedef enum
 {
+    undefined,
     add,
     multiply,
     solve

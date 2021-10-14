@@ -4,17 +4,14 @@ status_t dispatch_action(action_t action, int argc, const char **argv)
 {
     switch (action)
     {
-    case add:
-        return process_bin_op(argc, argv, mat_add);
-
-    case multiply:
-        return process_bin_op(argc, argv, mat_mul);
-
-    case solve:
-        return process_solve(argc, argv);
-
-    default:
-        return invalid_action;
+        case add:
+            return process_bin_op(argc, argv, mat_add);
+        case multiply:
+            return process_bin_op(argc, argv, mat_mul);
+        case solve:
+            return process_solve(argc, argv);
+        default:
+            return invalid_action;
     }
 }
 

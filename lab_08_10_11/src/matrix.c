@@ -14,7 +14,7 @@ matrix_t mat_null(void)
     return res;
 }
 
-static void _free_data(data_t **data, size_t n)
+static void s_free_data(data_t **data, size_t n)
 {
     for (size_t i = 0; i < n; i++)
         free(data[i]);
@@ -24,7 +24,7 @@ static void _free_data(data_t **data, size_t n)
 
 void mat_destroy(matrix_t *mat)
 {
-    _free_data(mat->data, mat->rows);
+    s_free_data(mat->data, mat->rows);
     *mat = mat_null();
 }
 
@@ -47,7 +47,7 @@ status_t mat_read(matrix_t *mat, const char *filename)
     return status;
 }
 
-static data_t **_allocate_mat_data(size_t rows, size_t cols)
+static data_t **s_allocate_mat_data(size_t rows, size_t cols)
 {
     if (rows == 0 || cols == 0)
         return NULL;
@@ -62,7 +62,7 @@ static data_t **_allocate_mat_data(size_t rows, size_t cols)
         data[i] = malloc(cols * sizeof(data_t));
         if (!data[i])
         {
-            _free_data(data, i);
+            s_free_data(data, i);
             return NULL;
         }
     }
@@ -70,11 +70,11 @@ static data_t **_allocate_mat_data(size_t rows, size_t cols)
     return data;
 }
 
-static matrix_t _allocate_mat(size_t rows, size_t cols)
+static matrix_t s_allocate_mat(size_t rows, size_t cols)
 {
     matrix_t res = mat_null();
 
-    res.data = _allocate_mat_data(rows, cols);
+    res.data = s_allocate_mat_data(rows, cols);
     if (res.data != NULL)
     {
         res.rows = rows;
@@ -90,7 +90,7 @@ status_t mat_readf(matrix_t *mat, FILE *file)
         return bad_func_args;
 
     status_t status = success;
-    size_t rows, cols;
+    size_t rows = 0, cols = 0;
 
     if (fscanf(file, "%lu%lu", &rows, &cols) != 2)
         status = bad_matrix_format;
@@ -99,7 +99,7 @@ status_t mat_readf(matrix_t *mat, FILE *file)
     else
     {
         // allocate space
-        *mat = _allocate_mat(rows, cols);
+        *mat = s_allocate_mat(rows, cols);
         if (!mat_is_valid(mat))
             status = memory_error;
     }
@@ -109,8 +109,6 @@ status_t mat_readf(matrix_t *mat, FILE *file)
         for (size_t col = 0; col < cols && status == success; col++)
             if (fscanf(file, "%lf", &mat->data[row][col]) != 1)
                 status = bad_matrix_format;
-
-    // TODO: check rest of the file...
 
     if (status != success)
         mat_destroy(mat);
@@ -134,11 +132,8 @@ status_t mat_write(const matrix_t *mat, const char *filename)
 
 status_t mat_writef(const matrix_t *mat, FILE *file)
 {
-    if (mat == NULL || file == NULL)
+    if (!mat_is_valid(mat) || file == NULL)
         return bad_func_args;
-
-    if (!mat_is_valid(mat))
-        return invalid_matrix;
 
     status_t status = success;
 
@@ -165,7 +160,7 @@ status_t mat_add(matrix_t *res, const matrix_t *left, const matrix_t *right)
     if (left->rows != right->rows || left->cols != right->cols)
         return bad_matrix_dims;
 
-    *res = _allocate_mat(left->rows, left->cols);
+    *res = s_allocate_mat(left->rows, left->cols);
     if (!mat_is_valid(res))
         return memory_error;
 
@@ -184,7 +179,7 @@ status_t mat_mul(matrix_t *res, const matrix_t *left, const matrix_t *right)
     if (left->cols != right->rows)
         return bad_matrix_dims;
 
-    *res = _allocate_mat(left->rows, right->cols);
+    *res = s_allocate_mat(left->rows, right->cols);
     if (!mat_is_valid(res))
         return memory_error;
 
@@ -202,21 +197,21 @@ status_t mat_mul(matrix_t *res, const matrix_t *left, const matrix_t *right)
     return success;
 }
 
-static void _row_add(matrix_t *mat, size_t dst_index, size_t src_index, data_t factor)
+static void s_row_add(matrix_t *mat, size_t dst_index, size_t src_index, data_t factor)
 {
     if (mat_is_valid(mat) && src_index < mat->rows && dst_index < mat->rows)
         for (size_t col = 0; col < mat->cols; col++)
             mat->data[dst_index][col] += factor * mat->data[src_index][col];
 }
 
-static void _row_mul(matrix_t *mat, size_t row, data_t factor)
+static void s_row_mul(matrix_t *mat, size_t row, data_t factor)
 {
     for (size_t col = 0; col < mat->cols; col++)
         mat->data[row][col] *= factor;
 }
 
 // finds max in given row except last element
-static size_t _find_max_in_row(const matrix_t *mat, size_t row)
+static size_t s_find_max_in_row(const matrix_t *mat, size_t row)
 {
     data_t max = mat->data[row][0];
     size_t index = 0;
@@ -233,9 +228,9 @@ static size_t _find_max_in_row(const matrix_t *mat, size_t row)
     return index;
 }
 
-static matrix_t _mat_clone(const matrix_t *src)
+static matrix_t s_mat_clone(const matrix_t *src)
 {
-    matrix_t res = _allocate_mat(src->rows, src->cols);
+    matrix_t res = s_allocate_mat(src->rows, src->cols);
 
     if (mat_is_valid(&res))
         for (size_t row = 0; row < res.rows; row++)
@@ -244,7 +239,7 @@ static matrix_t _mat_clone(const matrix_t *src)
     return res;
 }
 
-static void _swap_cols(matrix_t *mat, size_t col_1, size_t col_2)
+static void s_swap_cols(matrix_t *mat, size_t col_1, size_t col_2)
 {
     for (size_t row = 0; row < mat->rows; row++)
     {
@@ -254,14 +249,14 @@ static void _swap_cols(matrix_t *mat, size_t col_1, size_t col_2)
     }
 }
 
-static status_t _solve_gauss(matrix_t *res, matrix_t *input, size_t *col_indices)
+static status_t s_solve_gauss(matrix_t *res, matrix_t *input, size_t *col_indices)
 {
     for (size_t row = 0; row < input->rows; row++)
     {
-        size_t max_col = _find_max_in_row(input, row);
+        size_t max_col = s_find_max_in_row(input, row);
         if (row != max_col)
         {
-            _swap_cols(input, row, max_col);
+            s_swap_cols(input, row, max_col);
             size_t tmp = col_indices[row];
             col_indices[row] = col_indices[max_col];
             col_indices[max_col] = tmp;
@@ -276,11 +271,11 @@ static status_t _solve_gauss(matrix_t *res, matrix_t *input, size_t *col_indices
             if (rtmp != row)
             {
                 data_t factor = -input->data[rtmp][row] / max_el;
-                _row_add(input, rtmp, row, factor);
+                s_row_add(input, rtmp, row, factor);
             }
         }
 
-        _row_mul(input, row, 1 / max_el);
+        s_row_mul(input, row, 1 / max_el);
     }
 
     for (size_t row = 0; row < input->rows; row++)
@@ -289,7 +284,7 @@ static status_t _solve_gauss(matrix_t *res, matrix_t *input, size_t *col_indices
     return success;
 }
 
-static size_t *_allocate_col_indices(size_t cols)
+static size_t *s_allocate_col_indices(size_t cols)
 {
     size_t *data = malloc(cols * sizeof(size_t));
 
@@ -309,20 +304,20 @@ status_t mat_gauss_solve(matrix_t *res, const matrix_t *input)
         return bad_matrix_dims;
 
     // column indices
-    size_t *col_indices = _allocate_col_indices(input->cols - 1);
+    size_t *col_indices = s_allocate_col_indices(input->cols - 1);
     if (col_indices == NULL)
         return memory_error;
 
     status_t status = memory_error;
 
-    *res = _allocate_mat(input->rows, 1);
+    *res = s_allocate_mat(input->rows, 1);
     if (mat_is_valid(res))
     {
-        matrix_t input_copy = _mat_clone(input);
+        matrix_t input_copy = s_mat_clone(input);
 
         if (mat_is_valid(&input_copy))
         {
-            status = _solve_gauss(res, &input_copy, col_indices);
+            status = s_solve_gauss(res, &input_copy, col_indices);
             mat_destroy(&input_copy);
         }
 
