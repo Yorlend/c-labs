@@ -26,7 +26,7 @@ func: app.exe
 app.exe: $(BASE_OBJS) $(MAIN_OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-unit_tests.exe: LDFLAGS += -lcheck -lpthread -lrt -lsubunit -lm
+unit_tests.exe: LDFLAGS += -lcheck -lpthread -lrt -lm
 unit_tests.exe: $(BASE_OBJS) $(UNIT_OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 

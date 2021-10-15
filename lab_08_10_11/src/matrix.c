@@ -279,7 +279,7 @@ static status_t s_solve_gauss(matrix_t *res, matrix_t *input, size_t *col_indice
     }
 
     for (size_t row = 0; row < input->rows; row++)
-        res->data[row][0] = input->data[col_indices[row]][input->cols - 1];
+        res->data[col_indices[row]][0] = input->data[row][input->cols - 1];
 
     return success;
 }
