@@ -7,8 +7,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <math.h>
 #include "file_utils.h"
 #include "item.h"
+
+#define EPS 1e-6
 
 
 bool validate_item(const item_t *item)
@@ -28,6 +31,8 @@ bool validate_item(const item_t *item)
 
 double get_density(const item_t *item)
 {
+    if (item == NULL || fabs(item->volume) < EPS)
+        return nan("");
     return item->weight / item->volume;
 }
 
@@ -98,7 +103,7 @@ void destroy_item(item_t *item)
 
 bool starts_with(const item_t *item, const char *sub)
 {
-    if (strlen(item->name) < strlen(sub))
+    if (sub == NULL || strlen(item->name) < strlen(sub))
         return false;
 
     for (int i = 0; *sub; i++, sub++)

@@ -96,6 +96,9 @@ status_t display_items_startswith(FILE *f, const items_t *items, const char *s)
 
 void sort_items(items_t *items)
 {
+    if (items == NULL || items->data == NULL)
+        return;
+
     for (size_t i = 0; i < items->size; i++)
         for (size_t j = 0; j < items->size - 1; j++)
             if (compare_items(items->data + j, items->data + j + 1) > 0)
