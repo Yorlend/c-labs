@@ -40,11 +40,10 @@ status_t input_string(FILE *file, char **line)
 
 status_t input_double(FILE *file, double *num)
 {
-    status_t status = success;
     char *buf = NULL;
     char *end_ptr = NULL;
 
-    status = input_string(file, &buf);
+    status_t status = input_string(file, &buf);
 
     if (status == success)
     {

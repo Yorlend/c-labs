@@ -44,7 +44,7 @@ item_t create_item(const char *name, double weight, double volume)
 
     item_t res = item_null();
 
-    res.name = name;
+    res.name = strdup(name);
     res.weight = weight;
     res.volume = volume;
 
@@ -66,7 +66,10 @@ status_t read_item(FILE *file, item_t *item)
         free(name);
 
     if (status == success)
+    {
         *item = create_item(name, weight, volume);
+        free(name);
+    }
 
     if (!validate_item(item))
     {

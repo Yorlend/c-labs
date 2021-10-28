@@ -29,9 +29,7 @@ status_t allocate_items(FILE *f, items_t *items)
     {
         items->data = calloc(size, sizeof(item_t));
         if (items->data != NULL)
-        {
             items->size = size;
-        }
         else
             status = memory_error;
     }

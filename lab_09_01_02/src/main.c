@@ -15,17 +15,14 @@ int main(int argc, char **argv)
 
     if (exit_code == success)
     {
-        if (!exit_code)
-            f = fopen(argv[1], "r");
+        f = fopen(argv[1], "r");
         
         if (f == NULL)
             exit_code = file_io_error;
     }
 
     if (exit_code == success)
-    {
         exit_code = read_items(f, &items);
-    }
 
     if (exit_code == success)
     {
