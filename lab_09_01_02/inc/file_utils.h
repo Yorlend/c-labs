@@ -1,10 +1,9 @@
 #ifndef __FILE_UTILS_H__
 #define __FILE_UTILS_H__
 
-#include "status_code.h"
-#include "item.h"
 #include <stdio.h>
 #include <stdbool.h>
+#include "status_code.h"
 
 
 bool file_is_empty(FILE *file);

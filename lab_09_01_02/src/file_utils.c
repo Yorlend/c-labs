@@ -54,7 +54,6 @@ status_t input_double(FILE *file, double *num)
             status = input_error;
 
         free(buf);
-
     }
 
     return status;

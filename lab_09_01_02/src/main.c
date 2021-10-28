@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <string.h>
 #include "status_code.h"
 #include "file_utils.h"
@@ -26,10 +25,6 @@ int main(int argc, char **argv)
     if (exit_code == success)
     {
         exit_code = read_items(f, &items);
-        if (exit_code != success)
-        {
-            printf("exit code after read: %d\n", exit_code);
-        }
     }
 
     if (exit_code == success)

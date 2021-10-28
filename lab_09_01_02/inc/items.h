@@ -1,11 +1,9 @@
 #ifndef __ITEMS_H__
 #define __ITEMS_H__
 
-#include "item.h"
-#include "status_code.h"
-#include <stdbool.h>
-#include <stdio.h>
 #include <stddef.h>
+#include "status_code.h"
+#include "item.h"
 
 
 typedef struct 

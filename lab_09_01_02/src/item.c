@@ -4,12 +4,11 @@
 #define _POSIX_C_SOURCE 200809L
 #endif
 
-#include "item.h"
-#include <string.h>
-#include <stdio.h>
-#include <ctype.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #include "file_utils.h"
+#include "item.h"
 
 
 bool validate_item(const item_t *item)
@@ -34,7 +33,7 @@ double get_density(const item_t *item)
 
 item_t item_null(void)
 {
-    item_t res = {.name = NULL, .volume = 0.0, .weight = 0.0};
+    item_t res = { .name = NULL, .volume = 0.0, .weight = 0.0 };
     return res;
 }
 

@@ -47,7 +47,6 @@ status_t read_items(FILE *f, items_t *items)
 
     if (f == NULL || items == NULL)
         status = file_io_error;
-
     else if (file_is_empty(f))
         status = file_io_error;
 

@@ -1,5 +1,5 @@
-#ifndef ITEM_H
-#define ITEM_H
+#ifndef __ITEM_H__
+#define __ITEM_H__
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -33,4 +33,4 @@ double compare_items(const item_t *item_1, const item_t *item_2);
 
 void swap_items(item_t *item_1, item_t *item_2);
 
-#endif // ITEM_H
+#endif /* __ITEM_H__ */
