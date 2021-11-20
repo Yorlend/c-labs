@@ -18,7 +18,7 @@ struct node
  * @param data Указатель на элемент узла
  * @return node_t* -- указатель на созданный узел
  */
-node_t* node_init(void *data);
+node_t *node_init(void *data);
 
 /**
  * @brief Функция печати списка на экран
@@ -27,7 +27,7 @@ node_t* node_init(void *data);
  * @param printer функция печати одного элемента списка
  */
 void list_print(FILE *f, node_t *head,
-    void (*printer)(FILE *, const void *));
+void (*printer)(FILE *, const void *));
 
 /**
  * @brief Очищает память, занимаемую списком
@@ -44,8 +44,8 @@ void list_destroy(node_t *head);
  * @param comparator Функция сравнения элементов списка
  * @return node_t* -- указатель на искомый узел
  */
-node_t* find(node_t *head, const void *data,
-    int (*comparator)(const void *, const void *));
+node_t *find(node_t *head, const void *data,
+int (*comparator)(const void *, const void *));
 
 /**
  * @brief Функция вставки элемента в список перед указанным
@@ -64,7 +64,7 @@ void insert(node_t **head, node_t *elem, node_t *before);
  * @param comparator Функция сравнения элементов списка
  */
 void remove_duplicates(node_t **head,
-    int (*comparator)(const void *, const void *));
+int (*comparator)(const void *, const void *));
 
 /**
  * @brief Функция получает список и делит его на две половины
@@ -82,8 +82,8 @@ void front_back_split(node_t *head, node_t **back);
  * @param comparator функция сравнения элементов списка
  * @return node_t* -- отсортированный список, полученный из двух исходных
  */
-node_t* sorted_merge(node_t **head_a, node_t **head_b,
-    int (*comparator)(const void *, const void *));
+node_t *sorted_merge(node_t **head_a, node_t **head_b,
+int (*comparator)(const void *, const void *));
 
 /**
  * @brief Сортирует список рекурсивным алгоритмом сортировки слиянием
@@ -92,6 +92,6 @@ node_t* sorted_merge(node_t **head_a, node_t **head_b,
  * @param comparator функция сравнения элементов списка
  * @return node_t* -- указатель на голову нового, отсортированного списка
  */
-node_t* sort(node_t *head, int (*comparator)(const void *, const void *));
+node_t *sort(node_t *head, int (*comparator)(const void *, const void *));
 
 #endif /* __LIST_H__ */

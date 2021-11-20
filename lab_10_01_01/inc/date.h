@@ -52,7 +52,7 @@ date_t str_to_date(const char *str);
  * @param date 
  * @return char* 
  */
-char* date_to_str(const date_t *date);
+char *date_to_str(const date_t *date);
 
 /**
  * @brief Inputs date from file

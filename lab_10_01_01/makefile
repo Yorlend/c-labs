@@ -1,6 +1,5 @@
 CC := gcc
-CFLAGS := -std=c99 -Wall -Werror -Wextra -pedantic -Iinc -O3 -Wno-incompatible-pointer-types
-UNIT_FLAGS := -Wno-pointer-to-int-cast -Wno-int-to-pointer-cast
+CFLAGS := -std=c99 -Wall -Werror -Wextra -pedantic -Iinc -O3
 
 SRCS := $(filter-out src/main.c, $(wildcard src/*.c))
 UNIT_SRCS := $(wildcard unit/*.c)
@@ -16,13 +15,12 @@ unit: unit.exe
 	@./unit.exe
 
 unit.exe: $(OBJS) $(UNIT_OBJS)
-	@$(CC) -o $@ $^ -lcheck
+	@$(CC) -o $@ $^ -lcheck -lpthread -lrt -lm
 
 $(OBJS) out/main.o: out/%.o: src/%.c
 	@mkdir -p $(dir $@) && $(CC) $(CFLAGS) -c -o $@ $^
 
 
-$(UNIT_OBJS): CFLAGS+= $(UNIT_FLAGS)
 $(UNIT_OBJS): out/%.o: unit/%.c
 	@mkdir -p $(dir $@) && $(CC) $(CFLAGS) -c -o $@ $^
 

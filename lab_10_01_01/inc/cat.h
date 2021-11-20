@@ -50,7 +50,7 @@ int prompt_cat(cat_t *cat);
  * 
  * @param cat 
  */
-void output_cat(FILE *file, const cat_t *cat);
+void output_cat(FILE *file, const void *cat);
 
 /**
  * @brief Free memory occupied by cat
@@ -66,6 +66,6 @@ void destroy_patient(cat_t *cat);
  * @param cat2
  * @return int 
  */
-int date_compare(const cat_t *cat1, const cat_t *cat2);
+int date_compare(const void *cat1, const void *cat2);
 
 #endif /* __CAT_H__ */

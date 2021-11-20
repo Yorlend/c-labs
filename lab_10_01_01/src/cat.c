@@ -66,22 +66,24 @@ int prompt_cat(cat_t *cat)
     return status;
 }
 
-void output_cat(FILE *file, const cat_t *cat)
+void output_cat(FILE *file, const void *cat)
 {
-    if (cat->name == NULL)
+    if (((const cat_t*)cat)->name == NULL)
         fprintf(file, "(null)\n");
     else
     {
-        char *str = date_to_str(&cat->date);
-        fprintf(file, "%s\n%s\n", cat->name, str);
+        char *str = date_to_str(&((const cat_t*)cat)->date);
+        fprintf(file, "%s\n%s\n", ((const cat_t*)cat)->name, str);
     }
 }
 
-int date_compare(const cat_t *cat1, const cat_t *cat2)
+int date_compare(const void *cat1, const void *cat2)
 {
-    int d_year = cat1->date.year - cat2->date.year;
-    int d_month = cat1->date.month - cat2->date.month;
-    int d_day = cat1->date.day - cat2->date.day;
+    const cat_t *c1 = (const cat_t*)cat1;
+    const cat_t *c2 = (const cat_t*)cat2;
+    int d_year = c1->date.year - c2->date.year;
+    int d_month = c1->date.month - c2->date.month;
+    int d_day = c1->date.day - c2->date.day;
 
     if (d_year == 0)
     {

@@ -30,10 +30,8 @@ int main(int argc, char **argv)
 
     if (argc == 3 && strcmp(argv[1], "sort") == 0)
         status = action_sort(argv[2]);
-
     else if (argc == 4 && strcmp(argv[1], "find") == 0)
         status = action_find(argv[2], argv[3]);
-
     else if (argc == 3 && strcmp(argv[1], "insert") == 0)
         status = action_insert(argv[2]);
 

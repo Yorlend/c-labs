@@ -73,9 +73,9 @@ static int input_cat_list(node_t **list, const char *filename)
     return status;
 }
 
-static int str_compare(const cat_t *cat, const char *str)
+static int str_compare(const void *cat, const void *str)
 {
-    return strcmp(cat->name, str);
+    return strcmp(((const cat_t*)cat)->name, (char*)str);
 }
 
 int action_find(const char *filename, const char *substr)

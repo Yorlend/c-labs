@@ -5,9 +5,9 @@
 #include "file_utils.h"
 
 
-static bool parse_field(const char** str, uint16_t* num)
+static bool parse_field(const char **str, uint16_t *num)
 {
-    const char* c = *str;
+    const char *c = *str;
 
     while (isdigit(**str))
         (*str)++;
@@ -16,7 +16,7 @@ static bool parse_field(const char** str, uint16_t* num)
     return true;
 }
 
-static bool parse(const char** str, char sym)
+static bool parse(const char **str, char sym)
 {
     if (str == NULL || *str == NULL || **str != sym)
         return false;
@@ -30,14 +30,14 @@ bool is_leap_year(uint16_t year)
     return year % 400 == 0 || (year % 100 != 0 && year % 4 == 0);
 }
 
-void reset_date(date_t* date)
+void reset_date(date_t *date)
 {
     date->day = 0;
     date->month = 0;
     date->year = 0;
 }
 
-bool date_valid(const date_t* date)
+bool date_valid(const date_t *date)
 {
     if (date->day < 1 || 31 < date->day)
         return false;
@@ -66,7 +66,7 @@ bool date_valid(const date_t* date)
     return true; 
 }
 
-date_t str_to_date(const char* str)
+date_t str_to_date(const char *str)
 {
     date_t date;
     reset_date(&date);
@@ -88,7 +88,7 @@ date_t str_to_date(const char* str)
     return date;
 }
 
-char* date_to_str(const date_t* date)
+char *date_to_str(const date_t *date)
 {
     static char buffer[18];
 
