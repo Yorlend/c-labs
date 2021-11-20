@@ -11,10 +11,10 @@ UNIT_OBJS := $(UNIT_SRCS:unit/%.c=out/%.o)
 app.exe: $(OBJS) out/main.o
 	@$(CC) -o $@ $^
 
-unit: unit.exe
-	@./unit.exe
+unit: unit_tests.exe
+	@./unit_tests.exe
 
-unit.exe: $(OBJS) $(UNIT_OBJS)
+unit_tests.exe: $(OBJS) $(UNIT_OBJS)
 	@$(CC) -o $@ $^ -lcheck -lpthread -lrt -lm
 
 $(OBJS) out/main.o: out/%.o: src/%.c
@@ -25,4 +25,4 @@ $(UNIT_OBJS): out/%.o: unit/%.c
 	@mkdir -p $(dir $@) && $(CC) $(CFLAGS) -c -o $@ $^
 
 clean:
-	rm -rf out unit.exe app.exe
+	rm -rf out unit_tests.exe app.exe

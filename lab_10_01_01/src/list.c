@@ -2,7 +2,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-node_t* node_init(void *data)
+node_t *node_init(void *data)
 {
     node_t *node = malloc(sizeof(node_t));
 
@@ -16,7 +16,7 @@ node_t* node_init(void *data)
 }
 
 void list_print(FILE *f, node_t *head,
-    void (*printer)(FILE *, const void *))
+void (*printer)(FILE *, const void *))
 {
     while (head != NULL)
     {
@@ -35,8 +35,8 @@ void list_destroy(node_t *head)
     }
 }
 
-node_t* find(node_t *head, const void *data,
-    int (*comparator)(const void*, const void*))
+node_t *find(node_t *head, const void *data,
+int (*comparator)(const void*, const void*))
 {
     while (head != NULL && comparator(head->data, data) != 0)
         head = head->next;
@@ -62,7 +62,7 @@ void insert(node_t **head, node_t *elem, node_t *before)
 }
 
 void remove_duplicates(node_t **head,
-    int (*comparator)(const void*, const void*))
+int (*comparator)(const void*, const void*))
 {
     while (*head != NULL)
     {
@@ -95,8 +95,8 @@ void front_back_split(node_t *head, node_t **back)
     head->next = NULL;
 }
 
-node_t* sorted_merge(node_t **head_a, node_t **head_b,
-    int (*comparator)(const void *, const void *))
+node_t *sorted_merge(node_t **head_a, node_t **head_b,
+int (*comparator)(const void *, const void *))
 {
     node_t *head = NULL;
     node_t **tail = &head;
@@ -132,7 +132,7 @@ node_t* sorted_merge(node_t **head_a, node_t **head_b,
     return head;
 }
 
-node_t* sort(node_t *head, int (*comparator)(const void *, const void *))
+node_t *sort(node_t *head, int (*comparator)(const void *, const void *))
 {
     if (head != NULL && head->next != NULL)
     {
