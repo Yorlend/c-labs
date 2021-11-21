@@ -33,6 +33,9 @@ static inline int cmp(node_t *n1, node_t *n2)
 
 int m_push(matrix_t *mat, int row, int col, data_t val)
 {
+    if (val == 0)
+        return SUCCESS;
+
     node_t *node = node_init(row, col, val);
 
     if (node == NULL)
@@ -98,7 +101,7 @@ static inline int input_node(matrix_t *mat, int row, int col)
     if (scanf("%d", &tmp) != 1)
         status = INP_ERR;
 
-    if (status == SUCCESS && tmp != 0)
+    if (status == SUCCESS)
         status = m_push(mat, row, col, tmp);
     
     return status;
@@ -124,7 +127,7 @@ int m_input(matrix_t *mat)
     return status;
 }
 
-void m_sum(matrix_t *res, const matrix_t *m1, const matrix_t *m2)
+int m_sum(matrix_t *res, const matrix_t *m1, const matrix_t *m2)
 {
     node_t *h1 = m1->head, *h2 = m2->head;
 
@@ -162,6 +165,8 @@ void m_sum(matrix_t *res, const matrix_t *m1, const matrix_t *m2)
         m_push(res, h2->row, h2->col, h2->value);
         h2 = h2->next;
     }
+
+    return res->head != NULL ? SUCCESS : OP_ERR;
 }
 
 static inline data_t m_get(const matrix_t *mat, int row, int col)
@@ -290,6 +295,8 @@ int m_mul(matrix_t *res, const matrix_t *m1, const matrix_t *m2)
 
     if (status != SUCCESS)
         m_destroy(res);
+    else if (res->head == NULL)
+        status = OP_ERR;
 
     return status;
 }
@@ -319,26 +326,46 @@ static inline int find_max_row(const matrix_t *mat)
     return max_row;
 }
 
-void m_maxrow_del(matrix_t *mat)
+int m_maxrow_del(matrix_t *mat)
 {
+    if (mat->head == NULL)
+        return OP_ERR;
+
     int max_row = find_max_row(mat);
     node_t *head = mat->head;
 
-    while (head != NULL && head->next != NULL && head->next->row != max_row)
-        head = head->next;
-
-    while (head != NULL && head->next != NULL && head->next->row == max_row)
+    if (head->row == max_row)
     {
-        node_t *tmp = head->next;
-        head->next = tmp->next;
-        free(tmp);
+        while (head != NULL && head->row == max_row)
+        {
+            head = head->next;
+            free(mat->head);
+            mat->head = head;
+        }
     }
-    
-    head = head->next;
+    else
+    {
+        while (head != NULL && head->next != NULL && head->next->row != max_row)
+            head = head->next;
+
+        while (head != NULL && head->next != NULL && head->next->row == max_row)
+        {
+            node_t *tmp = head->next;
+            head->next = tmp->next;
+            free(tmp);
+        }
+        
+        head = head->next;
+    }
+
+    if (mat->head == NULL)
+        return OP_ERR;
 
     while (head != NULL)
     {
         head->row--;
         head = head->next;
     }
+
+    return SUCCESS;
 }

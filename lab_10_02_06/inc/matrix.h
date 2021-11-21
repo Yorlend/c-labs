@@ -77,7 +77,7 @@ int m_input(matrix_t *mat);
  * @param m2 right matrix
  * @return int -- status code
  */
-void m_sum(matrix_t *res, const matrix_t *m1, const matrix_t *m2);
+int m_sum(matrix_t *res, const matrix_t *m1, const matrix_t *m2);
 
 /**
  * @brief Matrix multiplication
@@ -95,6 +95,6 @@ int m_mul(matrix_t *res, const matrix_t *m1, const matrix_t *m2);
  * @param mat given matrix
  * @return int -- status code
  */
-void m_maxrow_del(matrix_t *mat);
+int m_maxrow_del(matrix_t *mat);
 
 #endif /* __MATRIX_H__ */

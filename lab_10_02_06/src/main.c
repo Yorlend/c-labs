@@ -36,10 +36,11 @@ int main(void)
             status = m_input(&m2);
 
         if (status == SUCCESS)
-        {
-            m_sum(&res, &m1, &m2);
+            status = m_sum(&res, &m1, &m2);
+
+        if (status == SUCCESS)
             m_print(&res);
-        }
+
         m_destroy(&m1);
         m_destroy(&m2);
         m_destroy(&res);
@@ -53,10 +54,10 @@ int main(void)
             status = m_input(&m2);
 
         if (status == SUCCESS)
-        {
-            m_mul(&res, &m1, &m2);
+            status = m_mul(&res, &m1, &m2);
+        
+        if (status == SUCCESS)
             m_print(&res);
-        }
 
         m_destroy(&m1);
         m_destroy(&m2);
@@ -69,10 +70,10 @@ int main(void)
         status = m_input(&mat);
 
         if (status == SUCCESS)
-        {
-            m_maxrow_del(&mat);
+            status = m_maxrow_del(&mat);
+
+        if (status == SUCCESS)
             m_print(&mat);
-        }
         
         m_destroy(&mat);
     }
