@@ -138,5 +138,6 @@ int action_insert(const char *filename)
         fclose(file);
     }
 
+    cat_list_destroy(&list);
     return status;
 }

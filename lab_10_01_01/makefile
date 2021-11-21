@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -std=c99 -Wall -Werror -Wextra -pedantic -Iinc -O3
+CFLAGS := -std=c99 -Wall -Werror -Wextra -pedantic -Iinc -g -ggdb
 
 SRCS := $(filter-out src/main.c, $(wildcard src/*.c))
 UNIT_SRCS := $(wildcard unit/*.c)

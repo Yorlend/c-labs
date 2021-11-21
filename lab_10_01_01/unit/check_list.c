@@ -17,28 +17,31 @@
         l_node = l_node->next; \
         t_node = t_node->next; \
     } \
-    smart_list_destroy(test); \
+    smart_list_destroy(&test); \
 }
 
 static node_t *list_from_array(int* array, size_t size)
 {
     node_t *list = NULL;
+    node_t **tail = &list;
 
     for (size_t i = 0; i < size; i++)
     {
         int *data = malloc(sizeof(int));
         *data = array[i];
-        insert(&list, node_init(data), NULL);
+        *tail = node_init(data);
+        tail = &(*tail)->next;
     }
 
     return list;
 }
 
-static void smart_list_destroy(node_t *list)
+static void smart_list_destroy(node_t **list)
 {
-    for (node_t *node = list; node != NULL; node = node->next)
+    for (node_t *node = *list; node != NULL; node = node->next)
         free(node->data);
-    list_destroy(list);
+    list_destroy(*list);
+    *list = NULL;
 }
 
 static int int_cmp(const void *a, const void *b)
@@ -57,6 +60,7 @@ START_TEST(find_empty)
     ck_assert_ptr_eq(res, NULL);
 
     free(elem);
+    elem = NULL;
 }
 END_TEST
 
@@ -73,7 +77,7 @@ START_TEST(find_failed)
     ck_assert_list_eq(list, 4, 2, 5, -7, 11);
 
     free(elem);
-    smart_list_destroy(list); 
+    smart_list_destroy(&list); 
 }
 END_TEST
 
@@ -90,7 +94,7 @@ START_TEST(find_success)
     ck_assert_list_eq(list, 4, 2, 5, -7, 11);
 
     free(elem);
-    smart_list_destroy(list); 
+    smart_list_destroy(&list); 
 }
 END_TEST
 
@@ -104,7 +108,7 @@ START_TEST(insert_empty)
     insert(&list, node_init(elem), NULL);
     ck_assert_list_eq(list, -32);
 
-    smart_list_destroy(list);
+    smart_list_destroy(&list);
 }
 END_TEST
 
@@ -116,10 +120,11 @@ START_TEST(insert_head)
     int *elem = malloc(sizeof(int));
     *elem = 5;
 
+    printf("HEAD: \n%p\n\n", (void*)list);
     insert(&list, node_init(elem), list);
     ck_assert_list_eq(list, 5, 12, 6, -7, 3, -21, 0);
 
-    smart_list_destroy(list);
+    smart_list_destroy(&list);
 }
 END_TEST
 
@@ -131,10 +136,11 @@ START_TEST(insert_body)
     int *elem = malloc(sizeof(int));
     *elem = 5;
 
+    printf("BODY: \n%p\n\n", (void*)list);
     insert(&list, node_init(elem), list->next->next);
     ck_assert_list_eq(list, 12, 6, 5, -7, 3, -21, 0);
 
-    smart_list_destroy(list);
+    smart_list_destroy(&list);
 }
 END_TEST
 
@@ -149,7 +155,7 @@ START_TEST(insert_tail)
     insert(&list, node_init(elem), NULL);
     ck_assert_list_eq(list, 12, 6, -7, 5);
 
-    smart_list_destroy(list);
+    smart_list_destroy(&list);
 }
 END_TEST
 
@@ -170,19 +176,26 @@ START_TEST(remove_nothing)
     remove_duplicates(&list, int_cmp);
     ck_assert_list_eq(list, 1, 2, 4, 5, 7);
 
-    smart_list_destroy(list);
+    smart_list_destroy(&list);
 }
 END_TEST
 
 START_TEST(remove_something)
 {
     int array[] = {1, 1, 1, 2, 3, 3};
-    node_t *list = list_from_array(array, 6);
+    int *ptrs = malloc(sizeof(array));
+    node_t *list = NULL;
+    for (int i = 0; i < 6; i++)
+    {
+        ptrs[i] = array[i];
+        insert(&list, node_init(ptrs + i), NULL);
+    }
 
     remove_duplicates(&list, int_cmp);
     ck_assert_list_eq(list, 1, 2, 3);
 
-    smart_list_destroy(list);
+    list_destroy(list);
+    free(ptrs);
 }
 END_TEST
 
@@ -208,7 +221,7 @@ START_TEST(split_one)
     ck_assert_list_eq(list, 3);
     ck_assert_ptr_eq(back, NULL);
 
-    smart_list_destroy(list);
+    smart_list_destroy(&list);
 }
 END_TEST
 
@@ -222,8 +235,8 @@ START_TEST(split_even)
     ck_assert_list_eq(list, 4, 3, -6);
     ck_assert_list_eq(back, -21, 804, -2);
 
-    smart_list_destroy(list);
-    smart_list_destroy(back);
+    smart_list_destroy(&list);
+    smart_list_destroy(&back);
 }
 END_TEST
 
@@ -237,8 +250,8 @@ START_TEST(split_odd)
     ck_assert_list_eq(list, 4, 3, -6);
     ck_assert_list_eq(back, -21, 804);
 
-    smart_list_destroy(list);
-    smart_list_destroy(back);
+    smart_list_destroy(&list);
+    smart_list_destroy(&back);
 }
 END_TEST
 
@@ -265,7 +278,7 @@ START_TEST(merge_left)
     ck_assert_ptr_eq(list_2, NULL);
     ck_assert_list_eq(res, 1, 3, 4, 4);
 
-    smart_list_destroy(res);
+    smart_list_destroy(&res);
 }
 END_TEST
 
@@ -280,7 +293,7 @@ START_TEST(merge_right)
     ck_assert_ptr_eq(list_2, NULL);
     ck_assert_list_eq(res, 1, 3, 4, 4);
 
-    smart_list_destroy(res);
+    smart_list_destroy(&res);
 }
 END_TEST
 
@@ -296,7 +309,7 @@ START_TEST(merge_both)
     ck_assert_ptr_eq(list_2, NULL);
     ck_assert_list_eq(res, 1, 2, 3, 3, 4, 4, 5, 6);
 
-    smart_list_destroy(res);
+    smart_list_destroy(&res);
 }
 END_TEST
 
@@ -319,7 +332,7 @@ START_TEST(sort_one)
     node_t *res = sort(list, int_cmp);
     ck_assert_list_eq(res, 123);
 
-    smart_list_destroy(res);
+    smart_list_destroy(&res);
 }
 END_TEST
 
@@ -331,7 +344,7 @@ START_TEST(sort_even)
     node_t *res = sort(list, int_cmp);
     ck_assert_list_eq(res, -5, -2, -1, 3, 4, 7);
 
-    smart_list_destroy(res);
+    smart_list_destroy(&res);
 }
 END_TEST
 
@@ -343,7 +356,7 @@ START_TEST(sort_odd)
     node_t *res = sort(list, int_cmp);
     ck_assert_list_eq(res, -5, -2, -1, 3, 4, 6, 7);
 
-    smart_list_destroy(res);
+    smart_list_destroy(&res);
 }
 END_TEST
 

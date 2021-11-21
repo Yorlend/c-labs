@@ -46,19 +46,11 @@ int (*comparator)(const void*, const void*))
 
 void insert(node_t **head, node_t *elem, node_t *before)
 {
-    if (*head == before)
-    {
-        elem->next = *head;
-        *head = elem;
-    }
-    else
-    {
-        while ((*head)->next != NULL && (*head)->next != before)
-            head = &(*head)->next;
-        
-        elem->next = (*head)->next;
-        (*head)->next = elem;
-    }
+    while (*head != NULL && *head != before)
+        head = &((*head)->next);
+
+    elem->next = *head;
+    *head = elem;
 }
 
 void remove_duplicates(node_t **head,
