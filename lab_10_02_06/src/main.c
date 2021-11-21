@@ -5,6 +5,7 @@
 #endif
 
 #include <string.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include "matrix.h"
 #include "error_types.h"
@@ -80,5 +81,6 @@ int main(void)
     else
         status = OP_ERR;
 
+    free(mode);
     return status;
 }

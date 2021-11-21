@@ -276,7 +276,7 @@ int m_mul(matrix_t *res, const matrix_t *m1, const matrix_t *m2)
 
     int res_rows = rows1;
     int res_cols = cols2;
-    int dim = cols1 < rows2 ? cols1 : rows2;
+    int dim = cols1 > rows2 ? cols1 : rows2;
 
     for (int row = 0; status == SUCCESS && row < res_rows; row++)
     {
@@ -289,7 +289,8 @@ int m_mul(matrix_t *res, const matrix_t *m1, const matrix_t *m2)
                 data_t v2 = m_get(m2, k, col);
                 value += v1 * v2;
             }
-            status = m_set(res, row, col, value);
+            if (value != 0)
+                status = m_set(res, row, col, value);
         }
     }
 
@@ -310,7 +311,6 @@ static inline int find_max_row(const matrix_t *mat)
     {
         max_row = head->row;
         max_val = head->value;
-        head = head->next;
     }
 
     while (head != NULL)
@@ -320,9 +320,10 @@ static inline int find_max_row(const matrix_t *mat)
             max_row = head->row;
             max_val = head->value;
         }
+
         head = head->next;
     }
-    
+
     return max_row;
 }
 
