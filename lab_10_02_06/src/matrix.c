@@ -198,13 +198,23 @@ static inline int m_set_notnull(matrix_t *mat, int row, int col, data_t value)
         status = m_insert_node(node, row, col, value);
     else
     {
-        while (*node != NULL && (*node)->row < row)// && (*node)->col < col)
+        while (*node != NULL && (*node)->row < row)
             node = &(*node)->next;
         
         if (*node == NULL)
             status = m_insert_node(node, row, col, value);
-        else if ((*node)->row == row && (*node)->col == col)
-            (*node)->value = value;
+        else if ((*node)->row == row)
+        {
+            while (*node != NULL && (*node)->col < col)
+                node = &(*node)->next;
+
+            if (*node == NULL)
+                status = m_insert_node(node, row, col, value);
+            else if ((*node)->col == col)
+                (*node)->value = value;
+            else
+                status = m_insert_node(&(*node)->next, row, col, value);
+        }
         else
             status = m_insert_node(&(*node)->next, row, col, value);
     }

@@ -25,6 +25,7 @@ int main(void)
         status = m_input(&mat);
         if (status == SUCCESS)
             m_print(&mat);
+        m_destroy(&mat);
     }
     else if (status == SUCCESS && strcmp(mode, "add\n") == 0)
     {
@@ -39,6 +40,9 @@ int main(void)
             m_sum(&res, &m1, &m2);
             m_print(&res);
         }
+        m_destroy(&m1);
+        m_destroy(&m2);
+        m_destroy(&res);
     }
     else if (status == SUCCESS && strcmp(mode, "mul\n") == 0)
     {
@@ -53,6 +57,10 @@ int main(void)
             m_mul(&res, &m1, &m2);
             m_print(&res);
         }
+
+        m_destroy(&m1);
+        m_destroy(&m2);
+        m_destroy(&res);
     }
     else if (status == SUCCESS && strcmp(mode, "lin\n") == 0)
     {
@@ -65,6 +73,8 @@ int main(void)
             m_maxrow_del(&mat);
             m_print(&mat);
         }
+        
+        m_destroy(&mat);
     }
     else
         status = OP_ERR;
