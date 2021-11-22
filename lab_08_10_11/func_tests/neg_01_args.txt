@@ -1,0 +1,1 @@
+./app.exe v in_1.txt in_2.txt out.txt
