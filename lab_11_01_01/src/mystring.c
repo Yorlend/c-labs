@@ -90,7 +90,7 @@ static int check_format(const char *format)
 
 int my_snprintf(char *s, size_t n, const char *format, ...)
 {
-    if (!check_format(format) || s == NULL || n == 0 || format == NULL)
+    if (!check_format(format) || (s == NULL && n > 0))
         return ARG_ERR;
 
     int parsed = 0;
