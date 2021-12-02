@@ -1,5 +1,6 @@
 #include <check.h>
 #include <stdlib.h>
+#include <limits.h>
 #include <mystring.h>
 #include <string.h>
 #include <stdio.h>
@@ -57,6 +58,18 @@ START_TEST(mixed)
 }
 END_TEST
 
+START_TEST(short_min)
+{
+    assert_snprintf("SHORT MIN: %hi", SHRT_MIN);
+}
+END_TEST
+
+START_TEST(short_max)
+{
+    assert_snprintf("SHORT MAX: %hi", SHRT_MAX);
+}
+END_TEST
+
 TCase *my_snprintf_case(void)
 {
     TCase *tcase = tcase_create("my_snprintf");
@@ -67,6 +80,8 @@ TCase *my_snprintf_case(void)
     tcase_add_test(tcase, short_underflow);
     tcase_add_test(tcase, zero_short);
     tcase_add_test(tcase, mixed);
+    tcase_add_test(tcase, short_min);
+    tcase_add_test(tcase, short_max);
 
     return tcase;
 }

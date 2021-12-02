@@ -32,22 +32,23 @@ static int push_string(char **s, size_t *n, const char *str)
 static int push_number(char **s, size_t *n, short num)
 {
     int parsed = 0;
+    int tmp_num = num;
 
     char digs[MAX_DIG] = {[MAX_DIG - 1] = '\0'};
     size_t count = MAX_DIG - 1;
 
-    if (num < 0)
+    if (tmp_num < 0)
     {
         push_char(s, n, '-');
-        num *= -1;
+        tmp_num *= -1;
         parsed++;
     }
 
     do
     {
-        digs[--count] = '0' + num % 10;
-        num /= 10;
-    } while (num != 0);
+        digs[--count] = '0' + tmp_num % 10;
+        tmp_num /= 10;
+    } while (tmp_num != 0);
 
     parsed += push_string(s, n, &digs[count]);
     
