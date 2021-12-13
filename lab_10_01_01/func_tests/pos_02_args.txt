@@ -1,0 +1,1 @@
+./app.exe find pos_02_in.txt "cat 2"
